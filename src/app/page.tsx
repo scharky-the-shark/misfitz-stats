@@ -16,7 +16,7 @@ export default function Home() {
           </button>
 
           <button className="rounded-2xl border border-white/20 px-6 py-3 font-semibold transition hover:bg-white/10">
-            Join Community
+            Search for players
           </button>
         </div>
       </section>
