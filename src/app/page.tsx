@@ -3,8 +3,14 @@
 "use client";
 
 import { useEffect } from "react";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const features = [
+  {
+    title: "Game Version",
+    desc: "Explore different game versions, not just text but also clips and shots.",
+  },
   {
     title: "Lore & World",
     desc: "Discover characters, hidden relic stories and the dark world of Misfitz.",
@@ -46,135 +52,37 @@ export default function Home() {
       <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#00D9FF]/10 blur-3xl" />
 
       {/* Navbar */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          {/* Logo */}
-          <div className="flex items-center gap-4">
-            <img
-              src="/logo.png"
-              alt="Misfitz Logo"
-              className="h-12 w-auto drop-shadow-[0_0_18px_rgba(124,255,0,0.45)]"
-            />
-
-            <div>
-              <p className="text-xl font-black tracking-widest text-[#7CFF00]">
-                MISFITZ
-              </p>
-
-              <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-                Community Hub
-              </p>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <nav className="hidden items-center gap-8 lg:flex">
-            <div className="group relative">
-              <button className="transition hover:text-[#7CFF00]">
-                Game + Lore
-              </button>
-
-              <div className="absolute top-10 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Characters
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Relics
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Map
-                </a>
-              </div>
-            </div>
-
-            <div className="group relative">
-              <button className="transition hover:text-[#00D9FF]">
-                Tutorial
-              </button>
-
-              <div className="absolute top-10 hidden min-w-[240px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  How to Install
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Learn the Game
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Become a Pro
-                </a>
-              </div>
-            </div>
-
-            <div className="group relative">
-              <button className="transition hover:text-[#7CFF00]">
-                Updates
-              </button>
-
-              <div className="absolute top-10 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Patch Notes
-                </a>
-              </div>
-            </div>
-
-            <div className="group relative">
-              <button className="transition hover:text-[#00D9FF]">
-                Leaderboards
-              </button>
-
-              <div className="absolute top-10 hidden min-w-[260px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Top Relic Collectors
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Top Killers
-                </a>
-
-                <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                  Fastest Relic Finish
-                </a>
-              </div>
-            </div>
-
-            <a className="transition hover:text-[#7CFF00]">Stats</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
-      <section className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
-        <div className="absolute h-[500px] w-[500px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
+      <section className="relative mx-auto flex min-h-[58vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
+        <div className="absolute h-[420px] w-[420px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
 
         <img
           src="/logo.png"
           alt="Misfitz"
-          className="relative z-10 mb-8 w-full max-w-[480px] drop-shadow-[0_0_45px_rgba(124,255,0,0.45)]"
+          className="relative z-10 mb-3 w-full max-w-[520px] drop-shadow-[0_0_35px_rgba(124,255,0,0.45)]"
         />
 
         <div className="relative z-10 max-w-5xl">
-          <h1 className="mb-6 text-5xl font-black uppercase tracking-wider md:text-7xl">
+          <h1 className="mb-4 text-4xl font-black uppercase tracking-wider md:text-6xl">
             The Ultimate
             <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
               MISFITZ TRACKER
             </span>
           </h1>
 
-          <p className="mx-auto mb-10 max-w-3xl text-lg text-white/70 md:text-2xl">
+          <p className="mx-auto mb-6 max-w-3xl text-sm text-white/70 md:text-lg">
             Explore lore, discover relics, track statistics, dominate
             leaderboards and become one of the deadliest Misfitz players.
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="rounded-2xl bg-[#7CFF00] px-8 py-4 text-lg font-bold text-black transition hover:scale-105 hover:shadow-[0_0_35px_rgba(124,255,0,0.55)]">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button className="rounded-2xl bg-[#7CFF00] px-6 py-3 text-base font-bold text-black transition hover:scale-105 hover:shadow-[0_0_35px_rgba(124,255,0,0.55)]">
               About Misfitz
             </button>
 
-            <button className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-lg font-semibold backdrop-blur-xl transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10">
+            <button className="rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-base font-semibold backdrop-blur-xl transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10">
               View Stats
             </button>
           </div>
@@ -182,62 +90,23 @@ export default function Home() {
       </section>
 
       {/* Feature Cards */}
-      <section className="relative mx-auto grid max-w-7xl gap-6 px-6 pb-24 md:grid-cols-2 xl:grid-cols-4">
+      <section className="relative mx-auto grid max-w-7xl gap-4 px-6 pb-12 md:grid-cols-2 xl:grid-cols-5">
         {features.map((card) => (
           <div
             key={card.title}
-            className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-[#7CFF00]/40 hover:bg-white/10"
+            className="group rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#7CFF00]/40 hover:bg-white/10"
           >
-            <div className="mb-4 h-2 w-16 rounded-full bg-gradient-to-r from-[#7CFF00] to-[#00D9FF]" />
+            <div className="mb-3 h-2 w-14 rounded-full bg-gradient-to-r from-[#7CFF00] to-[#00D9FF]" />
 
-            <h3 className="mb-3 text-2xl font-bold">{card.title}</h3>
+            <h3 className="mb-2 text-xl font-bold">{card.title}</h3>
 
-            <p className="text-white/65">{card.desc}</p>
+            <p className="text-[15px] text-white/65 leading-relaxed">{card.desc}</p>
           </div>
         ))}
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/20 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-8 text-center md:flex-row md:text-left">
-          <div>
-            <p className="text-lg font-bold text-[#7CFF00]">
-              MISFITZ STATS PAGE
-            </p>
-
-            <p className="mt-2 text-sm text-white/45">
-              Platform for statistics, tutorials and
-              leaderboards.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
-            <a
-              href="https://www.antiherostudios.com"
-              target="_blank"
-              className="transition hover:text-[#7CFF00]"
-            >
-              Official Studio
-            </a>
-
-            <a
-              href="https://www.antiherostudios.com/en?creatorCode=SCHARKY"
-              target="_blank"
-              className="transition hover:text-[#7CFF00]"
-            >
-              Register for Playtests
-            </a>
-
-            <a className="transition hover:text-[#7CFF00]">
-              Discord
-            </a>
-
-            <a className="transition hover:text-[#00D9FF]">
-              Privacy Policy
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
