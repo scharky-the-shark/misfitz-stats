@@ -5,27 +5,28 @@
 import { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Link from "next/link";
 
 const features = [
   {
-    title: "Game Version",
+    title: "(working on) Game Versions",
     desc: "Explore different game versions, not just text but also clips and shots.",
   },
   {
-    title: "Lore & World",
+    title: "(Soon) Lore & World",
     desc: "Discover characters, hidden relic stories and the dark world of Misfitz.",
   },
   {
-    title: "Tutorials",
+    title: "(Soon) Tutorials",
     desc: "Learn mechanics, strategies and advanced gameplay techniques.",
   },
   {
-    title: "Leaderboards",
-    desc: "Track top killers, relic collectors and fastest players worldwide.",
+    title: "(Soon) Leaderboards",
+    desc: "Track top killers, relic collectors and more.",
   },
   {
     title: "Live Statistics",
-    desc: "Real-time stats, match tracking and future API integrations.",
+    desc: "Real-time stats, match tracking",
   },
 ];
 
@@ -58,11 +59,27 @@ export default function Home() {
       <section className="relative mx-auto flex min-h-[58vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
         <div className="absolute h-[420px] w-[420px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
 
-        <img
-          src="/logo.png"
-          alt="Misfitz"
-          className="relative z-10 mb-3 w-full max-w-[520px] drop-shadow-[0_0_35px_rgba(124,255,0,0.45)]"
-        />
+        <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-yellow-500/20 bg-yellow-500/10 p-5 backdrop-blur-xl">
+
+  <h2 className="text-lg font-bold text-yellow-300">
+    Website Under Active Development
+  </h2>
+
+  <div className="mt-3 space-y-2 text-sm text-white/75">
+    <p>
+      • Mobile and tablet support is currently incomplete.
+    </p>
+
+    <p>
+      • Some buttons or pages may not function yet.
+    </p>
+
+    <p>
+      • Stats requests may take a few seconds during high traffic.
+    </p>
+  </div>
+
+</div>
 
         <div className="relative z-10 max-w-5xl">
           <h1 className="mb-4 text-4xl font-black uppercase tracking-wider md:text-6xl">
@@ -72,19 +89,20 @@ export default function Home() {
             </span>
           </h1>
 
+
           <p className="mx-auto mb-6 max-w-3xl text-sm text-white/70 md:text-lg">
-            Explore lore, discover relics, track statistics, dominate
+            Explore soon lore, discover relics, track statistics, dominate
             leaderboards and become one of the deadliest Misfitz players.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <button className="rounded-2xl bg-[#7CFF00] px-6 py-3 text-base font-bold text-black transition hover:scale-105 hover:shadow-[0_0_35px_rgba(124,255,0,0.55)]">
-              About Misfitz
-            </button>
 
-            <button className="rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-base font-semibold backdrop-blur-xl transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10">
-              View Stats
-            </button>
+            <Link
+            href="/stats"
+            className="rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-base font-semibold backdrop-blur-xl transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10"
+          >
+            View Stats
+          </Link>
           </div>
         </div>
       </section>
