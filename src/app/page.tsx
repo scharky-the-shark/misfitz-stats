@@ -71,7 +71,7 @@ export default function Home() {
     </p>
 
     <p>
-      • Some buttons or pages may not function yet.
+      • Many buttons or pages may not function yet.
     </p>
 
     <p>
