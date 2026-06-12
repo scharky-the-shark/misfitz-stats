@@ -65,6 +65,12 @@ export default function CreditsPage() {
              Relic on the error page drawn by @oguiee
           </p>
           <p>
+            <strong>Creator:</strong> @thatkoza
+          </p>
+          <p>
+             Error page for unsupported devices drawn
+          </p>
+          <p>
             Creator-provided screenshots, media, artwork,
             promotional material, and other content remain
             the property of their respective creator.

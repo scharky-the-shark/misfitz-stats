@@ -3,6 +3,7 @@ import "./globals.css";
 
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import DeviceGuard from "../components/DeviceGuard";
 
 export const metadata: Metadata = {
   title: "Misfitz Stats",
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#0B0F19] text-white">
-
+      <DeviceGuard />
         <div className="flex min-h-screen flex-col">
 
           <Header />
