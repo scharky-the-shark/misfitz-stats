@@ -1,11 +1,12 @@
-// src/app/layout.tsx
-
 import type { Metadata } from "next";
 import "./globals.css";
 
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+
 export const metadata: Metadata = {
-  title: "Misfitz Stats Page",
-  description: "Misfitz community hub, leaderboards and statistics.",
+  title: "Misfitz Stats",
+  description: "Community statistics for Misfitz"
 };
 
 export default function RootLayout({
@@ -13,9 +14,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-[#0B0F19] text-white">
+
+        <div className="flex min-h-screen flex-col">
+
+          <Header />
+
+          <main className="flex-1">
+            {children}
+          </main>
+
+          <Footer />
+
+        </div>
+
+      </body>
     </html>
   );
 }

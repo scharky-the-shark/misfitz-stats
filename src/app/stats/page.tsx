@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 
 import styles from "./stats.module.css";
+import { API_URL } from "@/lib/api";
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 export default function StatsPage() {
 
@@ -37,25 +36,13 @@ export default function StatsPage() {
 
 
   async function searchPlayer() {
-
-    /*
-      Frontend cooldown
-    */
-    const now = Date.now();
-
-    const lastRequest = localStorage.getItem("lastRequest");
-
-    if (lastRequest && now - Number(lastRequest) < 5000) {
-
-      setError("Please wait 5 seconds before searching again.");
-
+    if (!playerId.trim()) {
+      setError("Please enter a Player ID.");
       return;
-
     }
-
-    localStorage.setItem("lastRequest", String(now));
-
-
+    /*
+      Frontend cooldown [DELETED]
+    */
 
     /*
       Auto-add Player:
@@ -76,36 +63,77 @@ export default function StatsPage() {
 
     try {
 
-      const response = await fetch(
-        `https://brawl-unity-arena.duckdns.org/stats-api/player/${cleanedId}`
-      );
+    const response = await fetch(
+  `${API_URL}/api/player/${cleanedId}`
+  );
 
 
 
-      const json = await response.json();
+    let json;
 
+    try {
+      json = await response.json();
+    } catch {
+      json = {};
+    }
 
+    if (!response.ok) {
 
-      if (!response.ok) {
-
-        throw new Error(json.error || "Failed to fetch stats");
-
+      if (response.status === 429) {
+        throw new Error(
+          json.error ||
+          "Please wait before searching again."
+        );
       }
 
+      if (response.status === 404) {
+        throw new Error(
+          "Player ID not found."
+        );
+      }
+
+      if (response.status >= 500) {
+        throw new Error(
+          "The stats server is currently unavailable."
+        );
+      }
+
+      throw new Error(
+        json.error ||
+        "Failed to fetch stats."
+      );
+    }
 
 
-      setData(json);
 
+const playerData = {
+  ...json.data,
+  playerId: json.data.playerId.replace("Player:", "")
+};
+
+setData(playerData);
     } catch (err: any) {
 
-      setError(err.message || "Something went wrong");
-
-    } finally {
-
-      setLoading(false);
-
+    if (
+      err instanceof TypeError &&
+      err.message.includes("fetch")
+    ) {
+      setError(
+        "Unable to connect to the stats server."
+      );
+    } else {
+      setError(
+        err.message || "Something went wrong."
+      );
     }
+
   }
+  finally {
+
+  setLoading(false);
+
+}
+}
 
 
 
@@ -122,6 +150,12 @@ export default function StatsPage() {
       case "epic":
         return "text-purple-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.7)]";
 
+      case "rare":
+        return "text-green-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.7)]";
+
+      case "common":
+        return "text-gray-300 drop-shadow-[0_0_10px_rgba(216,180,254,0.7)]";
+
       default:
         return "text-white";
 
@@ -131,11 +165,7 @@ export default function StatsPage() {
 
 
   return (
-    <main className="relative min-h-screen bg-[#0b1220] text-white overflow-y-auto">
-
-      <Header />
-
-
+    <main className="relative min-h-fit bg-[#0b1220] text-white overflow-y-auto">
 
       <section className={styles.container}>
 
@@ -210,7 +240,7 @@ export default function StatsPage() {
 
             <button
               onClick={searchPlayer}
-              disabled={loading}
+              disabled={loading || !playerId.trim()}
               className="rounded-2xl bg-white px-6 py-4 font-bold text-black transition hover:scale-105 disabled:opacity-50"
             >
               {loading ? "Searching..." : "Search"}
@@ -238,9 +268,9 @@ export default function StatsPage() {
                 <h2 className="mb-4 text-2xl font-bold">Profile</h2>
 
                 <div className="space-y-3 text-white/80">
-                  <p><strong>Player ID:</strong> {data.profile.playerId}</p>
-                  <p><strong>Name:</strong> {data.profile.name}</p>
-                  <p><strong>Level:</strong> {data.profile.level}</p>
+                  <p><strong>Player ID:</strong> {data.playerId}</p>
+                  <p><strong>Name:</strong> {data.playerName}</p>
+                  <p><strong>Level:</strong> {data.playerLevel}</p>
                 </div>
               </div>
 
@@ -275,7 +305,7 @@ export default function StatsPage() {
                   </h3>
 
                   <div className="space-y-2 text-white/80">
-                    {Object.entries(data.gear.byRarity).map(([key, value]) => (
+                    {Object.entries(data.stats.gearByRarity).map(([key, value]) => (
                       <p
                         key={key}
                         className={rarityClass(key)}
@@ -292,7 +322,6 @@ export default function StatsPage() {
         </div>
       </section>
 
-      <Footer />
     </main>
   );
 }

@@ -3,30 +3,28 @@
 "use client";
 
 import { useEffect } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 const features = [
   {
-    title: "(working on) Game Versions",
-    desc: "Explore different game versions, not just text but also clips and shots.",
+    title: "Game Versions",
+    desc: "Explore different game versions.",
+  },
+  {
+    title: "Live Statistics",
+    desc: "Real-time stats",
+  },
+  {
+    title: "(Working on) Leaderboards",
+    desc: "Track top killers, relic collectors and more.",
   },
   {
     title: "(Soon) Lore & World",
-    desc: "Discover characters, hidden relic stories and the dark world of Misfitz.",
+    desc: "Discover stories and the dark world of Misfitz.",
   },
   {
     title: "(Soon) Tutorials",
     desc: "Learn mechanics, strategies and advanced gameplay techniques.",
-  },
-  {
-    title: "(Soon) Leaderboards",
-    desc: "Track top killers, relic collectors and more.",
-  },
-  {
-    title: "Live Statistics",
-    desc: "Real-time stats, match tracking",
   },
 ];
 
@@ -44,7 +42,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0b1220] text-white select-none">
+    <main className="relative min-h-fit overflow-hidden bg-[#0b1220] text-white select-none">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,217,255,0.12),transparent_35%)]" />
 
@@ -52,14 +50,11 @@ export default function Home() {
 
       <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#00D9FF]/10 blur-3xl" />
 
-      {/* Navbar */}
-      <Header />
-
       {/* Hero */}
       <section className="relative mx-auto flex min-h-[58vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
         <div className="absolute h-[420px] w-[420px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
 
-        <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-yellow-500/20 bg-yellow-500/10 p-5 backdrop-blur-xl">
+        <div className="mx-auto mt-6 mb-20 max-w-3xl rounded-3xl border border-yellow-500/20 bg-yellow-500/10 p-5 backdrop-blur-xl">
 
   <h2 className="text-lg font-bold text-yellow-300">
     Website Under Active Development
@@ -67,15 +62,11 @@ export default function Home() {
 
   <div className="mt-3 space-y-2 text-sm text-white/75">
     <p>
-      • Mobile and tablet support is currently incomplete.
+      • Mobile and tablet support is currently unavailable
     </p>
 
     <p>
-      • Many buttons or pages may not function yet.
-    </p>
-
-    <p>
-      • Stats requests may take a few seconds during high traffic.
+      • Buttons or pages may not function yet
     </p>
   </div>
 
@@ -114,7 +105,6 @@ export default function Home() {
             key={card.title}
             className="group rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#7CFF00]/40 hover:bg-white/10"
           >
-            <div className="mb-3 h-2 w-14 rounded-full bg-gradient-to-r from-[#7CFF00] to-[#00D9FF]" />
 
             <h3 className="mb-2 text-xl font-bold">{card.title}</h3>
 
@@ -122,9 +112,6 @@ export default function Home() {
           </div>
         ))}
       </section>
-
-      {/* Footer */}
-      <Footer />
     </main>
   );
 }

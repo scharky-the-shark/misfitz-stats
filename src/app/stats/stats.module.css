@@ -23,7 +23,7 @@
 
   filter: blur(3px) brightness(0.62);
 
-  transform: scale(1.03) translateY(-40px);
+  transform: scale(1.2) translateY(-40px);
 }
 
 .overlay {

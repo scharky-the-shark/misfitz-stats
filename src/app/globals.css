@@ -36,3 +36,23 @@ body {
   background: linear-gradient(#7cff00, #00d9ff);
   border-radius: 999px;
 }
+
+@keyframes relic-fall {
+  from {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
