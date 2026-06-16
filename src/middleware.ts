@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
 const ua = request.headers.get("user-agent") || "";
 
 const isMobile =
-  /Android|iPhone|iPod|Mobile|Tablet|Opera Mini|IEMobile/i.test(ua);
+  /Android|iPhone/i.test(ua);
 
 const isiPadDesktopMode =
   ua.includes("Macintosh") &&
