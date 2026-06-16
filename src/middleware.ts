@@ -16,14 +16,14 @@ export function middleware(request: NextRequest) {
 const ua = request.headers.get("user-agent") || "";
 
 const isMobile =
-  /Android|iPhone/i.test(ua);
+  /Android|iPhone|iPod|Mobile|Tablet|Opera Mini|IEMobile/i.test(ua);
 
 const isiPadDesktopMode =
   ua.includes("Macintosh") &&
   ua.includes("Safari") &&
   ua.includes("AppleWebKit");
 
-if (isMobile || isiPadDesktopMode) {
+if (isMobile) {
   return NextResponse.redirect(
     new URL("/unsupported-device", request.url)
   );
