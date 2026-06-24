@@ -4,12 +4,11 @@ export default function Footer() {
       <div className="flex w-full flex-col items-center justify-between gap-3 px-6 py-4 text-center md:flex-row md:text-left lg:px-12">        
         <div>
           <p className="text-lg font-bold text-[#7CFF00]">
-            MISFITZ STATS PAGE
+            MISFITZ STATZ
           </p>
 
           <p className="mt-2 text-sm text-white/45">
-            Platform for statistics, tutorials and
-            leaderboards.
+            Not owned or affiliated with Antihero Studios
           </p>
         </div>
 
@@ -34,12 +33,6 @@ export default function Footer() {
             className="transition hover:text-[#7CFF00]"
           >
             Status
-          </a>
-          <a
-            href="/credits"
-            className="transition hover:text-[#7CFF00]"
-          >
-            Credits
           </a>
           <a
             href="/privacy"

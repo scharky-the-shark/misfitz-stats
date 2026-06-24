@@ -52,7 +52,7 @@ return (
             </p>
 
             <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-              Community Hub
+              The 1st working tracker
             </p>
           </div>
         </div>
@@ -60,25 +60,54 @@ return (
         {/* Navigation */}
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
           <div className="group relative">
-            <button className="transition hover:text-[#7CFF00]">
-              Game + Lore
+            <button className="transition hover:text-[#00D9FF]">
+              About
             </button>
 
-            <div className="absolute top-full pt-3 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                Characters
+            <div className="absolute top-full pt-3 hidden min-w-[240px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/aboutUs">
+                Misfitz Statz
               </a>
-
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                Relics
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/discord">
+                Misfitz Statz Discord Bot
               </a>
-
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                Map
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                  href="/antihero">
+                Antihero Studios
+              </a>
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/misfitz">
+                Misfitz
               </a>
             </div>
           </div>
+          <div className="group relative">
+            <button className="transition hover:text-[#7CFF00]">
+              Game
+            </button>
 
+            <div className="absolute top-full pt-3 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/game/misfits">
+                Characters
+              </a>
+
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/game/relics">
+                Relics
+              </a>
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/game/map">
+                Map
+              </a>
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/game/sneaky">
+                Sneak Peeks
+              </a>
+            </div>
+          </div>
           <div className="group relative">
             <button className="transition hover:text-[#00D9FF]">
               Tutorial
@@ -92,18 +121,39 @@ return (
               <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
                 Learn the Game
               </a>
-
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                Become a Pro
-              </a>
             </div>
           </div>
+          <div className="group relative">
           <a
             href="/version"
             className="transition hover:text-[#7CFF00]"
           >
             Version
           </a>
+
+            <div className="absolute top-full pt-3 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/version/antiherostudios">
+                Antihero Studios
+              </a>
+              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                 href="/version/game">
+                Game
+              </a>
+              <a 
+              className="block rounded-xl px-3 py-2 hover:bg-white/5"
+              href="/version/discord"
+              >
+                Discord Bot
+              </a>
+              <a 
+              className="block rounded-xl px-3 py-2 hover:bg-white/5"
+              href="/version/website"
+              >
+                Misfitz Statz page
+              </a>
+            </div>
+          </div>
           <div className="group relative">
             <button className="transition hover:text-[#00D9FF]">
               Leaderboards

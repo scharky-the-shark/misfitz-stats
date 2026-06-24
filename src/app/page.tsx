@@ -18,9 +18,10 @@ const features = [
     title: "(Working on) Leaderboards",
     desc: "Track top killers, relic collectors and more.",
   },
+  
   {
-    title: "(Soon) Lore & World",
-    desc: "Discover stories and the dark world of Misfitz.",
+    title: "(Soon) Meta Maker",
+    desc: "Look up for the meta and simulate you own meta of Misfitz",
   },
   {
     title: "(Soon) Tutorials",

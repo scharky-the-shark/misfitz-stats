@@ -23,7 +23,7 @@ const isiPadDesktopMode =
   ua.includes("Safari") &&
   ua.includes("AppleWebKit");
 
-if (isMobile) {
+if (isMobile || isiPadDesktopMode) {
   return NextResponse.redirect(
     new URL("/unsupported-device", request.url)
   );

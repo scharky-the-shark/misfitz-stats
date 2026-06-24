@@ -100,7 +100,7 @@ style={{
       <div className="absolute inset-0 bg-[#00D9FF]/20 blur-3xl" />
 
       <Image
-        src="/relic.png"
+        src="/relic_lost.png"
         alt="Relic"
         width={320}
         height={320}
