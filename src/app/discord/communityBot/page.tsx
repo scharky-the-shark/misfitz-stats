@@ -72,7 +72,7 @@ export default function DiscordPage() {
 
   {/* Install Button */}
   <Link
-    href="https://discord.com/oauth2/authorize?client_id=1514885656952705155&permissions=4503601775234048&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fready&integration_type=0&scope=bot+applications.commands"
+    href="https://discord.com/oauth2/authorize?client_id=1514885656952705155&permissions=4503601775234048&integration_type=0&scope=bot+applications.commands"
     className="mt-10 rounded-2xl border border-[#7CFF00]/30 bg-[#7CFF00]/10 px-10 py-4 text-lg font-semibold text-[#7CFF00] transition hover:bg-[#7CFF00]/20"
   >
     Install Community Bot
@@ -437,7 +437,7 @@ export default function DiscordPage() {
     </p>
 
     <Link
-      href="https://discord.com/oauth2/authorize?client_id=1514885656952705155&permissions=4503601775234048&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fready&integration_type=0&scope=bot+applications.commands"
+      href="https://discord.com/oauth2/authorize?client_id=1514885656952705155&permissions=4503601775234048&integration_type=0&scope=bot+applications.commands"
       className="mt-10 inline-flex rounded-2xl border border-[#7CFF00]/30 bg-[#7CFF00]/10 px-10 py-4 text-lg font-semibold text-[#7CFF00] transition hover:bg-[#7CFF00]/20"
     >
       Install Community Bot
