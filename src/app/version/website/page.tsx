@@ -3,18 +3,18 @@
 import { useEffect } from "react";
 
 const latestUpdate = {
-  version: "Unknown",
-  date: "20th June 2026",
+  date: "14th July 2026",
   changes: [
-    "",
+    "Added pages to add the bot to a server",
+    "Added page to choose which bot version is preferred",
+    "Damage stats for each Misfit is now shown"
   ],
 };
 const oldUpdates = [
   {
-    version: "Unknown",
     date: "19th June 2026",
     changes: [
-    "Soon...",
+    "Added stats for each Misfit",
     ],
   },
 ];
@@ -111,13 +111,11 @@ export default function VersionPage() {
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {oldUpdates.map((update) => (
             <div
-              key={update.version}
+              key={update.date}
               className="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
             >
               <div className="mb-5 flex items-center justify-between">
-                <h4 className="text-2xl font-bold">
-                  {update.version}
-                </h4>
+
 
                 <span className="text-sm text-zinc-500">
                   {update.date}

@@ -43,12 +43,12 @@ export default function DiscordPage() {
 
           <h1 className="mb-4 text-4xl font-black uppercase tracking-wider md:text-7xl">
             <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
-              Version Logging
+              Version Tracker
             </span>
           </h1>
 
           <p className="mx-auto mb-4 max-w-3xl text-sm text-white/70 md:text-lg">
-            Read the version history of the website, bot, game and Antihero Studios
+            Misfitz Statz is more theb you think. Read the version history of the website, bot, game and Antihero Studios
           </p>
 
         </div>

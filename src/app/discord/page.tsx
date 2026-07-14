@@ -9,6 +9,21 @@ const resources = [
     href: "/discord/commands",
   },
   {
+    title: "Update Log",
+    desc: "New features and changes.",
+    href: "/version/discord",
+  },
+  {
+    title: "Compare",
+    desc: "Compare the bot with the website.",
+    href: "/discord/compare",
+  },
+  {
+    title: "Support",
+    desc: "Get help for Misfitz Statz Bot",
+    href: "https://discord.gg/74suQKzBkp",
+  },
+  {
     title: "Privacy Policy",
     desc: "Learn how your data is handled.",
     href: "/privacy",
@@ -19,14 +34,14 @@ const resources = [
     href: "/terms",
   },
   {
-    title: "Update Log",
-    desc: "New features and changes.",
-    href: "/version/discord",
+    title: "Errors",
+    desc: "Our error Documentation for Misfitz Statz",
+    href: "/discord/errorcodes",
   },
   {
-    title: "Compare",
-    desc: "Compare the bot with the website.",
-    href: "/discord/compare",
+    title: "Status",
+    desc: "Check if the bt is online",
+    href: "/status",
   },
 ];
 
@@ -61,30 +76,17 @@ export default function DiscordPage() {
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/discord/install"
+              href="/discord/choose"
               className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold backdrop-blur-xl transition hover:border-[#7CFF00] hover:bg-[#7CFF00]/10"
             >
-              Add to Discord Server
-            </Link>
-
-            <Link
-              href="/discord/install"
-              className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold backdrop-blur-xl transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10"
-            >
-              User Install
+              Discover the bot for your need
             </Link>
           </div>
-        <div className="mx-auto mt-4 mb-2 max-w-3xl rounded-3xl border border-yellow-500/20 bg-yellow-500/10 p-5 backdrop-blur-xl">
-
-          <h2 className="text-lg font-bold text-yellow-300">
-            The Bot will be available for everyone on 15th July 2026
-          </h2>
-        </div>
         </div>
       </section>
 
       {/* Resource Cards */}
-      <section className="relative mx-auto grid max-w-7xl gap-4  pb-12 md:grid-cols-2 xl:grid-cols-5">
+      <section className="relative mx-auto grid max-w-6xl gap-4  pb-8 md:grid-cols-2 xl:grid-cols-4">
         {resources.map((card) => (
           <Link
             key={card.title}

@@ -6,8 +6,36 @@ import Footer from "../components/layout/Footer";
 import DeviceGuard from "../components/DeviceGuard";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://misfitz-stats.pages.dev"),
+
   title: "Misfitz Stats",
-  description: "Community statistics for Misfitz"
+  description:
+    "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
+
+  openGraph: {
+    title: "Misfitz Stats",
+    description:
+      "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
+    url: "https://misfitz-stats.pages.dev",
+    siteName: "Misfitz Stats",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Misfitz Stats",
+    description:
+      "Track your Misfitz progress, compare players and climb the leaderboards.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

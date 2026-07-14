@@ -104,7 +104,7 @@ export const MISFITS: Misfit[] = [
     id: "drip",
     name: "Drip",
     class: "Tank",
-    description: "Placeholder description.",
+    description: "From a bean to a machine.",
 
     hp: 10350,
     dmg: 50,

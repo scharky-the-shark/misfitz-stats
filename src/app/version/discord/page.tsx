@@ -2,14 +2,24 @@
 
 import { useEffect } from "react";
 
-const latestUpdate = {
-  version: "v0.0.0 (138)",
-  date: "14th June 2026",
-  changes: [
-    "You can now check your stats from PA5",
-  ],
-};
+const latestUpdate =   {
+    version: "v1.0.0 (159)",
+    date: "15th July 2026",
+    changes: [
+      "Moderation features to delete Scam automatically",
+      "1st version open for everyone",
+      "Bot now permanently online",
+    ],
+  }
+
 const oldUpdates = [
+    {
+    version: "v0.0.0 (138)",
+    date: "18th June 2026",
+    changes: [
+      "You can now check your stats from PA5",
+    ],
+  },
   {
     version: "v0.0.0 (125)",
     date: "14th June 2026",

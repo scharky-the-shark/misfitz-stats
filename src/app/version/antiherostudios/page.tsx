@@ -3,20 +3,27 @@
 import { useEffect } from "react";
 
 const latestUpdate = {
-  version: "Unknown",
-  date: "20th June 2026",
+  version: "2.7.26",
+  date: "9th July 2026",
   changes: [
-    "",
+    "Shipment details updated",
   ],
 };
 const oldUpdates = [
   {
-    version: "Unknown",
-    date: "19th June 2026",
+    version: "6.6.26",
+    date: "18th June 2026",
     changes: [
-    "Soon...",
+    "Terms updated",
+    "Privacy Policy updated",
     ],
   },
+  {
+    version: "1.7.26",
+    date: "3rd July 2026",
+    changes: [
+      "Collection/ merch page opened",]
+  }
 ];
 
 export default function VersionPage() {
