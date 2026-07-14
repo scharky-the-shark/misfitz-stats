@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 const latestUpdate = {
+  version: "v0.2.0",
   date: "14th July 2026",
   changes: [
     "Added pages to add the bot to a server",
