@@ -47,7 +47,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#0B0F19] text-white">
-      <DeviceGuard />
         <div className="flex min-h-screen flex-col">
 
           <Header />

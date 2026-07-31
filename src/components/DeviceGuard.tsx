@@ -12,7 +12,6 @@ export default function DeviceGuard() {
     }
 
     if (window.innerWidth < 100) {
-      window.location.replace("/unsupported-device");
     }
   }, [pathname]);
 
