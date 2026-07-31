@@ -77,33 +77,31 @@ return ( <main
       <span
         key={symbol.id}
         className="absolute text-white/10 font-mono text-xl"        
-style={{
-  left: `${symbol.left}%`,
-  top: `${symbol.top}px`,
-  animation: `relic-fall ${symbol.duration}s linear infinite`,
-  animationDelay: `${symbol.delay}s`
-}}
+          style={{
+            left: `${symbol.left}%`,
+            top: `${symbol.top}px`,
+            animation: `relic-fall ${symbol.duration}s linear infinite`,
+            animationDelay: `${symbol.delay}s`
+          }}
       >
         {symbol.symbol}
       </span>
-
     ))}
-
   </div>
 
   {/* Main Content */}
 
-  <section className="relative z-10 flex h-screen flex-col items-center justify-center px-6 text-center">
+  <section className="relative z-10 flex h-screen flex-col items-center text-center">
 
     <div className="relative">
 
       <div className="absolute inset-0 bg-[#00D9FF]/20 blur-3xl" />
 
       <Image
-        src="/relic.png"
+        src="/relic_lost.png"
         alt="Relic"
-        width={320}
-        height={320}
+        width={160}
+        height={160}
         className="relative drop-shadow-[0_0_40px_rgba(0,217,255,0.4)]"
         priority
       />

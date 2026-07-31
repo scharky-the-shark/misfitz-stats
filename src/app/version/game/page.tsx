@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const latestUpdate = {
   version: "v0.0.5 (5529)",
@@ -263,6 +263,8 @@ export default function VersionPage() {
     };
   }, []);
 
+const [expandedVersion, setExpandedVersion] = useState<string | null>(null);
+
   return (
     <main className="min-h-screen bg-[#050816] text-white">
 
@@ -327,28 +329,55 @@ export default function VersionPage() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {oldUpdates.map((update) => (
-            <div
-              key={update.version}
-              className="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+          <div
+            key={update.version}
+            className="rounded-[2rem] border border-white/10 bg-white/[0.03] transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+          >
+
+            <button
+              onClick={() =>
+                setExpandedVersion(
+                  expandedVersion === update.version ? null : update.version
+                )
+              }
+              className="flex w-full items-center justify-between p-7 text-left"
             >
-              <div className="mb-5 flex items-center justify-between">
+
+              <div>
                 <h4 className="text-2xl font-bold">
                   {update.version}
                 </h4>
 
-                <span className="text-sm text-zinc-500">
+                <p className="mt-1 text-sm text-zinc-500">
                   {update.date}
-                </span>
+                </p>
               </div>
 
-              <div className="space-y-3 text-sm text-zinc-300">
-                {update.changes.map((change, index) => (
-                  <p key={index}>
-                    • {change}
-                  </p>
-                ))}
+              <span className="text-3xl font-light text-cyan-300">
+                {expandedVersion === update.version ? "−" : "+"}
+              </span>
+
+            </button>
+
+            {expandedVersion === update.version && (
+
+              <div className="border-t border-white/10 px-7 pb-7 pt-5">
+
+                <div className="space-y-3 text-sm text-zinc-300">
+
+                  {update.changes.map((change, index) => (
+                    <p key={index}>
+                      • {change}
+                    </p>
+                  ))}
+
+                </div>
+
               </div>
-            </div>
+
+            )}
+
+          </div>
           ))}
         </div>
       </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const latestUpdate =   {
     version: "v1.0.0 (159)",
@@ -27,7 +27,7 @@ const oldUpdates = [
     "First crashtest version",
     "/system - Check the stats of the bot",
     "/stats [playerID] - search for an Misfitz account and get stats",
-    "/test - Embed section to test different versions of messages",
+    "/test - Embed section to test different versions of embeded messages",
 
     ],
   },
@@ -59,6 +59,8 @@ export default function VersionPage() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+const [expandedVersion, setExpandedVersion] = useState<string | null>(null);
 
   return (
     <main className="min-h-screen bg-[#050816] text-white">
@@ -123,33 +125,55 @@ export default function VersionPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {oldUpdates.map((update) => (
-            <div
-              key={update.version}
-              className="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
-            >
-              <div className="mb-5 flex items-center justify-between">
-                <h4 className="text-2xl font-bold">
-                  {update.version}
-                </h4>
+        {oldUpdates.map((update) => (
+          <div
+            key={update.date}
+            className="rounded-[2rem] border border-white/10 bg-white/[0.03] transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+          >
 
+            <button
+              onClick={() =>
+                setExpandedVersion(
+                  expandedVersion === update.date ? null : update.date
+                )
+              }
+              className="flex w-full items-center justify-between p-7 text-left"
+            >
+
+              <div>
                 <span className="text-sm text-zinc-500">
                   {update.date}
                 </span>
               </div>
 
-              <div className="space-y-3 text-sm text-zinc-300">
-                {update.changes.map((change, index) => (
-                  <p key={index}>
-                    • {change}
-                  </p>
-                ))}
+              <span className="text-3xl font-light text-cyan-300">
+                {expandedVersion === update.date ? "−" : "+"}
+              </span>
+
+            </button>
+
+            {expandedVersion === update.date && (
+
+              <div className="border-t border-white/10 px-7 pb-7 pt-5">
+
+                <div className="space-y-3 text-sm text-zinc-300">
+
+                  {update.changes.map((change, index) => (
+                    <p key={index}>
+                      • {change}
+                    </p>
+                  ))}
+
+                </div>
+
               </div>
-            </div>
-          ))}
+
+            )}
+
+          </div>
+        ))}
         </div>
       </section>
-
     </main>
   );
 }

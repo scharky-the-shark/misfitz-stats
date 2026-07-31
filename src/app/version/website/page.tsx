@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const latestUpdate = {
-  version: "v0.2.0",
-  date: "14th July 2026",
+  version: "v0.3.0",
+  date: "31st July 2026",
   changes: [
-    "Added pages to add the bot to a server",
-    "Added page to choose which bot version is preferred",
-    "Damage stats for each Misfit is now shown"
+    "Support for mobile devices",
+    "Added: Leaderboards",
+    "Added: Navigation for Mobile",
+    "Fixed: Embeds",
+    "Rework: Character page",
+    "Rework: Stats page",
+    "Rework: Header",
+    "Rework: Status page",
   ],
 };
 const oldUpdates = [
@@ -18,6 +23,14 @@ const oldUpdates = [
     "Added stats for each Misfit",
     ],
   },
+  {
+    date: "14th July 2026",
+    changes: [
+      "Added pages to add the bot to a server",
+      "Added page to choose which bot version is preferred",
+      "Damage stats for each Misfit is now shown"
+    ],
+  }
 ];
 
 export default function VersionPage() {
@@ -46,6 +59,8 @@ export default function VersionPage() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+const [expandedVersion, setExpandedVersion] = useState<string | null>(null);
 
   return (
     <main className="min-h-screen bg-[#050816] text-white">
@@ -110,28 +125,53 @@ export default function VersionPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {oldUpdates.map((update) => (
-            <div
-              key={update.date}
-              className="group rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+        {oldUpdates.map((update) => (
+          <div
+            key={update.date}
+            className="rounded-[2rem] border border-white/10 bg-white/[0.03] transition duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+          >
+
+            <button
+              onClick={() =>
+                setExpandedVersion(
+                  expandedVersion === update.date ? null : update.date
+                )
+              }
+              className="flex w-full items-center justify-between p-7 text-left"
             >
-              <div className="mb-5 flex items-center justify-between">
 
-
+              <div>
                 <span className="text-sm text-zinc-500">
                   {update.date}
                 </span>
               </div>
 
-              <div className="space-y-3 text-sm text-zinc-300">
-                {update.changes.map((change, index) => (
-                  <p key={index}>
-                    • {change}
-                  </p>
-                ))}
+              <span className="text-3xl font-light text-cyan-300">
+                {expandedVersion === update.date ? "−" : "+"}
+              </span>
+
+            </button>
+
+            {expandedVersion === update.date && (
+
+              <div className="border-t border-white/10 px-7 pb-7 pt-5">
+
+                <div className="space-y-3 text-sm text-zinc-300">
+
+                  {update.changes.map((change, index) => (
+                    <p key={index}>
+                      • {change}
+                    </p>
+                  ))}
+
+                </div>
+
               </div>
-            </div>
-          ))}
+
+            )}
+
+          </div>
+        ))}
         </div>
       </section>
 

@@ -7,13 +7,19 @@ export const MISFITS: Misfit[] = [
     class: "Chaos Engine",
     description: "bad, untamed, aggressive",
 
-    hp: 7200,
-    dmg: 1000,
-    speed: 3,
-    range: 8,
+    status: "released",
 
-    attack: "4 pure energy blasts",
-    ultimate: "Massive fire laser",
+    stats: {
+      hp: 7200,
+      damage: 1000,
+      speed: 3,
+      range: 8,
+    },
+
+    abilities: {
+      attack: "4 pure energy blasts",
+      ultimate: "Massive fire laser",
+    },
 
     image: "/misfitz/ray.png",
 
@@ -26,14 +32,19 @@ export const MISFITS: Misfit[] = [
     class: "Assasine",
     description: "fast skater and ninja",
 
-    hp: 7500,
-    dmg: 1050,
+    status: "released",
 
-    speed: 4,
-    range: 7,
+    stats: {
+      hp: 7500,
+      damage: 1050,
+      speed: 4,
+      range: 7,
+    },
 
-    attack: "Throws ninja stars",
-    ultimate: "Dashing trough enemies",
+    abilities: {
+      attack: "Throws ninja stars",
+      ultimate: "Dashing trough enemies",
+    },
 
     image: "/misfitz/rush.png",
 
@@ -46,14 +57,19 @@ export const MISFITS: Misfit[] = [
     class: "Tank",
     description: "sick beats",
 
-    hp: 11000,
-    dmg: 900,
+    status: "released",
 
-    speed: 3,
-    range: 6,
+    stats: {
+      hp: 11000,
+      damage: 900,
+      speed: 3,
+      range: 6,
+    },
 
-    attack: "Sick beats",
-    ultimate: "boombox pulling enemies to a center point",
+    abilities: {
+      attack: "Sick beats",
+      ultimate: "boombox pulling enemies to a center point",
+    },
 
     image: "/misfitz/beat.png",
 
@@ -66,14 +82,19 @@ export const MISFITS: Misfit[] = [
     class: "Healer",
     description: "perfect... idk.",
 
-    hp: 6500,
-    dmg: 0,
+    status: "released",
 
-    speed: 3,
-    range: 9,
+    stats: {
+      hp: 6500,
+      damage: 0,
+      speed: 3,
+      range: 9,
+    },
 
-    attack: "Shots heals mates and hurts enemies",
-    ultimate: "Spawns a circle healing mates by 20% and dealing damage to enemies",
+    abilities: {
+      attack: "Shots heals mates and hurts enemies",
+      ultimate: "Spawns a circle healing mates by 20% and dealing damage to enemies",
+    },
 
     image: "/misfitz/gloss.png",
 
@@ -86,14 +107,19 @@ export const MISFITS: Misfit[] = [
     class: "Sniper",
     description: "hot 7years old Misfit?!",
 
-    hp: 7600,
-    dmg: 2200,
+    status: "released",
 
-    speed: 3,
-    range: 11,
+    stats: {
+      hp: 7600,
+      damage: 2200,
+      speed: 3,
+      range: 11,
+    },
 
-    attack: "Long range gumball",
-    ultimate: "Sticky gumball prevent enemies to move",
+    abilities: {
+      attack: "Long range gumball",
+      ultimate: "Sticky gumball prevent enemies to move",
+    },
 
     image: "/misfitz/shade.png",
 
@@ -106,14 +132,43 @@ export const MISFITS: Misfit[] = [
     class: "Tank",
     description: "From a bean to a machine.",
 
-    hp: 10350,
-    dmg: 50,
+    status: "released",
 
-    speed: 3,
-    range: 7,
+    stats: {
+      hp: 10350,
+      damage: 50,
+      speed: 3,
+      range: 7,
+    },
 
-    attack: "sprays graffiti on your face",
-    ultimate: "acid syrup dealing long-time damage",
+    abilities: {
+      attack: "sprays graffiti on your face",
+      ultimate: "acid syrup dealing long-time damage",
+    },
+
+    image: "/misfitz/drip.png",
+
+    accentColor: "#22c55e",
+  },
+  {
+    id: "fang",
+    name: "Locked",
+    class: "Soon",
+    description: "From a bean to a machine.",
+
+    status: "teaser",
+    
+    stats: {
+      hp: 0,
+      damage: 0,
+      speed: 0,
+      range: 0,
+    },
+
+    abilities: {
+      attack: "sprays graffiti on your face",
+      ultimate: "acid syrup dealing long-time damage",
+    },
 
     image: "/misfitz/drip.png",
 

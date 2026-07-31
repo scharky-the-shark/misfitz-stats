@@ -4,13 +4,19 @@ export interface Misfit {
   class: string;
   description: string;
 
-  hp: number;
-  dmg: number;
-  speed: number;
-  range: number;
+  status?: "released" | "teaser";
 
-  attack: string;
-  ultimate: string;
+  stats: {
+    hp: number;
+    damage: number;
+    speed: number;
+    range: number;
+  };
+
+  abilities: {
+    attack: string;
+    ultimate: string;
+  };
 
   image: string;
 

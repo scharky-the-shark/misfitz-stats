@@ -1,13 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoginModal from "../LoginModal";
 import { API_URL } from "@/lib/api";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
+  const [canHover, setCanHover] = useState(true);
+  const desktopNavRef = useRef<HTMLDivElement>(null);
   // SPAETER ÄENDERN
   useEffect(() => {
   fetch(`${API_URL}/auth/me`, {
@@ -22,6 +27,36 @@ export default function Header() {
     });
 }, []);
 
+useEffect(() => {
+  const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+  const update = () => {
+    setCanHover(media.matches);
+  };
+
+  update();
+
+  media.addEventListener("change", update);
+
+  return () => media.removeEventListener("change", update);
+}, []);
+
+useEffect(() => {
+  const handleClick = (event: MouseEvent) => {
+    if (
+      desktopNavRef.current &&
+      !desktopNavRef.current.contains(event.target as Node)
+    ) {
+      setDesktopDropdown(null);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClick);
+
+  return () =>
+    document.removeEventListener("mousedown", handleClick);
+}, []);
+
 const handleLogout = async () => {
   await fetch(
     `${API_URL}/auth/logout`,
@@ -33,6 +68,137 @@ const handleLogout = async () => {
   setLoggedIn(false);
   setMenuOpen(false);
 };
+
+const mobileNavigation = [
+  {
+    title: "Stats",
+    href: "/stats",
+    items: [],
+  },
+  {
+    title: "Leaderboards",
+    items: [
+      { label: "Top Relic Extractor", href: "/leaderboards/relics" },
+      { label: "Most Killers", href: "/leaderboards/kills" },
+      { label: "Most Deaths", href: "/leaderboards/deaths" },
+      { label: "Highest Playtime", href: "/leaderboards/playtime" },
+    ],
+  },
+  {
+    title: "Game",
+    items: [
+      {
+        label: "Characters",
+        href: "/game/misfits",
+      },
+      {
+        label: "Relics",
+        href: "https://misfitz.fandom.com/wiki/Relics",
+      },
+      {
+        label: "Map",
+        href: "https://misfitz.fandom.com/wiki/Zero_City",
+      },
+      {
+        label: "Sneak Peeks",
+        href: "/game/sneaky",
+      },
+    ],
+  },
+  {
+    title: "Tutorial",
+    items: [
+      {
+        label: "How to Install",
+        href: "/tutorial/install",
+      },
+      {
+        label: "Learn the Game",
+        href: "/tutorial",
+      },
+    ],
+  },
+  {
+    title: "Version",
+    items: [
+      {
+        label: "Antihero Studios",
+        href: "/version/antiherostudios",
+      },
+      {
+        label: "Game",
+        href: "/version/game",
+      },
+      {
+        label: "Discord Bot",
+        href: "/version/discord",
+      },
+      {
+        label: "Website",
+        href: "/version/website",
+      },
+    ],
+  },
+  {
+    title: "Discord Bot",
+    href: "/discord",
+    items: [],
+  },
+];
+
+const navigation = [
+  {
+    title: "Discord Bot",
+    color: "#00D9FF",
+    href: "/discord",
+    items: [],
+  },
+  {
+    title: "Game",
+    color: "#7CFF00",
+    items: [
+      { label: "Characters", href: "/game/misfits" },
+      { label: "Relics", href: "https://misfitz.fandom.com/wiki/Relics" },
+      { label: "Map", href: "https://misfitz.fandom.com/wiki/Zero_City" },
+      { label: "Sneak Peeks", href: "/game/sneaky" },
+    ],
+  },
+  {
+    title: "Tutorial",
+    color: "#00D9FF",
+    items: [
+      { label: "How to Install", href: "/tutorial/install" },
+      { label: "Learn the Game", href: "/tutorial" },
+    ],
+  },
+  {
+    title: "Version",
+    color: "#7CFF00",
+    items: [
+      { label: "Antihero Studios", href: "/version/antiherostudios" },
+      { label: "Game", href: "/version/game" },
+      { label: "Discord Bot", href: "/version/discord" },
+      { label: "Misfitz Statz Page", href: "/version/website" },
+    ],
+  },
+  {
+    title: "Leaderboards",
+    color: "#00D9FF",
+    items: [
+      { label: "Top Relic Extractor", href: "/leaderboards/relics" },
+      { label: "Most Killers", href: "/leaderboards/kills" },
+      { label: "Most Deaths", href: "/leaderboards/deaths" },
+      { label: "Highest Playtime", href: "/leaderboards/playtime" },
+    ],
+  },
+  {
+    title: "Stats",
+    href: "/stats",
+    items: [],
+  },
+];
+
+
 
 return (
   <>
@@ -46,7 +212,7 @@ return (
             className="h-12 w-auto drop-shadow-[0_0_18px_rgba(124,255,0,0.45)]"
           />
 
-          <div>
+          <div className="hide-under-1050">
             <p className="text-xl font-black tracking-widest text-[#7CFF00]">
               STATS TRACKER
             </p>
@@ -58,149 +224,203 @@ return (
         </div>
 
         {/* Navigation */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
-          <div className="group relative">
-            <button className="transition hover:text-[#00D9FF]">
-              About
-            </button>
+          <nav
+            ref={desktopNavRef}
+            className="ml-auto mr-4 hidden items-center gap-8 lg:flex"
+          >          
+          {navigation.map((section) => {
+            if (section.items.length === 0) {
+              return (
+                <a
+                  key={section.title}
+                  href={section.href}
+                  className="transition hover:text-[#7CFF00]"
+                >
+                  {section.title}
+                </a>
+              );
+            }
 
-            <div className="absolute top-full pt-3 hidden min-w-[240px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/aboutUs">
-                Misfitz Statz
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/discord">
-                Misfitz Statz Discord Bot
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                  href="/antihero">
-                Antihero Studios
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/misfitz">
-                Misfitz
-              </a>
-            </div>
-          </div>
-          <div className="group relative">
-            <button className="transition hover:text-[#7CFF00]">
-              Game
-            </button>
+            return (
+                <div
+                  key={section.title}
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (canHover) {
+                      setDesktopDropdown(section.title);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (canHover) {
+                      setDesktopDropdown(null);
+                    }
+                  }}
+                >
+                <button
+                  onClick={() => {
+                    if (!canHover) {
+                      setDesktopDropdown(
+                        desktopDropdown === section.title
+                          ? null
+                          : section.title
+                      );
+                    }
+                  }}
+                  className="transition"
+                  style={{
+                    color:
+                      desktopDropdown === section.title
+                        ? section.color
+                        : undefined,
+                  }}
+                >
+                  {section.title}
+                </button>
 
-            <div className="absolute top-full pt-3 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/game/misfits">
-                Characters
-              </a>
-
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/game/relics">
-                Relics
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/game/map">
-                Map
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/game/sneaky">
-                Sneak Peeks
-              </a>
-            </div>
-          </div>
-          <div className="group relative">
-            <button className="transition hover:text-[#00D9FF]">
-              Tutorial
-            </button>
-
-            <div className="absolute top-full pt-3 hidden min-w-[240px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                How to Install
-              </a>
-
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5">
-                Learn the Game
-              </a>
-            </div>
-          </div>
-          <div className="group relative">
-          <a
-            href="/version"
-            className="transition hover:text-[#7CFF00]"
-          >
-            Version
-          </a>
-
-            <div className="absolute top-full pt-3 hidden min-w-[220px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/version/antiherostudios">
-                Antihero Studios
-              </a>
-              <a className="block rounded-xl px-3 py-2 hover:bg-white/5"
-                 href="/version/game">
-                Game
-              </a>
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/version/discord"
-              >
-                Discord Bot
-              </a>
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/version/website"
-              >
-                Misfitz Statz page
-              </a>
-            </div>
-          </div>
-          <div className="group relative">
-            <button className="transition hover:text-[#00D9FF]">
-              Leaderboards
-            </button>
-
-            <div className="absolute top-full pt-3 hidden min-w-[260px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl group-hover:block">
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/collector"
-              >
-                Top Relic Collectors
-              </a>
-
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/killers"
-              >
-                Top Killers
-              </a>
-
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/deadly"
-              >
-                Most deadly players
-              </a>
-
-              <a 
-              className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              href="/playtime"
-              >
-                Highest playtime
-              </a>
-            </div>
-          </div>
-          <a
-            href="/stats"
-            className="transition hover:text-[#7CFF00]"
-          >
-            Stats
-          </a>
+                {desktopDropdown === section.title && (
+                  <div className="absolute top-full pt-3 min-w-[240px] rounded-2xl border border-white/10 bg-[#111827]/95 p-3 shadow-2xl backdrop-blur-xl">
+                    {section.items.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className="block rounded-xl px-3 py-2 hover:bg-white/5"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
+        {/* Mobile Menu Button */}
+          {mobileMenuOpen && (
+            <div className="absolute left-0 top-full z-50 w-full border-t border-white/10 bg-[#111827]/95 backdrop-blur-xl lg:hidden">
+              <div className="p-4">
+
+                {mobileNavigation.map((section) => (
+                  <div
+                    key={section.title}
+                    className="border-b border-white/5 last:border-0"
+                  >
+
+                    {section.items.length === 0 ? (
+                      <a
+                        href={section.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block rounded-xl px-4 py-3 font-semibold text-[#7CFF00] transition hover:bg-white/5"
+                      >
+                        {section.title}
+                      </a>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() =>
+                            setExpandedSection(
+                              expandedSection === section.title
+                                ? null
+                                : section.title
+                            )
+                          }
+                          className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-semibold transition hover:bg-white/5"
+                        >
+                          <span>{section.title}</span>
+
+                          <span className="text-white/60">
+                            {expandedSection === section.title ? "−" : "+"}
+                          </span>
+                        </button>
+
+                        {expandedSection === section.title && (
+                          <div className="pb-2">
+
+                            {section.items.map((item) => (
+                              <a
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="ml-4 block rounded-xl px-4 py-2 text-sm text-white/80 transition hover:bg-white/5 hover:text-white"
+                              >
+                                {item.label}
+                              </a>
+                            ))}
+
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                  </div>
+                ))}
+
+              </div>
+            </div>
+          )}
+
+          <div className="ml-auto flex items-center gap-3 lg:hidden">
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-white/10"
+              aria-label="Open navigation"
+            >
+              {mobileMenuOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+
+            {!loggedIn ? (
+              <button
+                onClick={() => setShowLoginModal(true)}
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
+              >
+                Sign In
+              </button>
+            ) : (
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
+              >
+                Account
+              </button>
+            )}
+
+          </div>
         {/* Account Area */}
-      <div className="relative ml-auto">
+      <div className="relative ml-8 hidden lg:block">
             {!loggedIn ? (
         <button
           onClick={() => {
+            setMobileMenuOpen(false);
             setShowLoginModal(true);
           }}
             className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"

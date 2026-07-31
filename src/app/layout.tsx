@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     siteName: "Misfitz Stats",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "front.png",
+        width: 1027,
+        height: 310,
       },
     ],
     locale: "en_US",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Misfitz Statz",
     description:
       "Track your Misfitz progress, compare players and climb the leaderboards.",
-    images: ["/og-image.png"],
+    images: ["/front.png"],
   },
 };
 

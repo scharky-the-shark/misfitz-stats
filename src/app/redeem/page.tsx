@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "@/lib/api";
 
-export default function VerificationPage() {  
+export default function VerificationPage() {
+  
   const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState<any>(null);
   const [playerId, setPlayerId] = useState("");
@@ -14,8 +15,8 @@ export default function VerificationPage() {
   useEffect(() => {
     if (
   process.env.NODE_ENV === "development" &&
-  new URLSearchParams(window.location.search).get("devLogin") === "1"
-  ) {
+  new URLSearchParams(window.location.search).get("devLogin") === "1")
+  {
   setAccount({
     discordId: "123456789012345678",
     linkedAccounts: [
@@ -133,7 +134,7 @@ export default function VerificationPage() {
     return (
       <main className="mx-auto max-w-4xl p-8">
         <h1 className="text-4xl font-bold">
-          Verification
+          Enter codes
         </h1>
 
         <p className="mt-6 text-white/70">
@@ -147,7 +148,7 @@ export default function VerificationPage() {
     return (
       <main className="mx-auto max-w-4xl p-8">
         <h1 className="text-4xl font-bold">
-          Verification
+          Enter codes and earn badges
         </h1>
 
         <p className="mt-6 text-red-400">
@@ -160,93 +161,30 @@ export default function VerificationPage() {
   return (
 
     <main className="mx-auto max-w-4xl p-8">
-
-<div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6">
-
-  <h2 className="text-2xl font-semibold">
-    Discord Account
-  </h2>
-
-  <p className="mt-4">
-    Discord ID:
-    <span className="ml-2 font-semibold">
-      {account.discordId}
+  {/* Headline */}
+  <h1 className="text-5xl font-black uppercase leading-none md:text-5xl">
+  Earn {" "}{" "}
+    <span className="bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
+      badges
+    </span>{" "}
+  <span className="block">
+    <span className="bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
+      from
+    </span>{" "}
+    <span className="bg-gradient-to-r from-[#FFE082] via-[#FFD54F] to-[#C9A227] bg-clip-text text-transparent">
+      everywhere
     </span>
-  </p>
-
-</div>
-
-<div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6">
-
-  <h2 className="text-2xl font-semibold">
-    Linked Accounts
-  </h2>
-
-  {account.linkedAccounts.length === 0 ? (
-
-    <p className="mt-4 text-white/60">
-      No linked accounts.
-    </p>
-
-  ) : (
-
-    <div className="mt-6 space-y-4">
-
-      {account.linkedAccounts.map(
-        (linked: any) => (
-
-          <div
-            key={linked.playerId}
-            className="rounded-2xl border border-white/10 p-4"
-          >
-
-            <p>
-              <strong>PlayerID:</strong>{" "}
-              {linked.playerId}
-            </p>
-
-            <p>
-              <strong>Privacy:</strong>{" "}
-              {linked.privacy}
-            </p>
-
-            <p>
-              <strong>Verification:</strong>{" "}
-              {linked.verified
-                ? "Verified"
-                : "Not Verified"}
-            </p>
-
-            <button
-              onClick={() =>
-                removePlayer(
-                  linked.playerId
-                )
-              }
-              className="mt-4 rounded-xl bg-red-500 px-4 py-2 text-white"
-            >
-              Remove
-            </button>
-
-          </div>
-
-        )
-      )}
-
-    </div>
-
-  )}
-
-</div>
+  </span>
+  </h1>
 <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6">
         <h2 className="mb-3 text-2xl font-bold">
-          Verification
+          Enter a code to redeem a badge
         </h2>
 
         <div className="mt-12 flex h-40 items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02]">
           <div className="text-center">
             <h3 className="text-3xl font-black tracking-wider text-lime-400">
-              Temporary disabled
+              Coming soon
             </h3>
           </div>
         </div>

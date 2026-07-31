@@ -5,34 +5,45 @@ import { API_URL } from "@/lib/api";
 
 type ServiceStatus = "operational" | "degraded" | "outage";
 
+interface ComponentStatus {
+  id: string;
+  name: string;
+  status: ServiceStatus;
+}
+
+interface CategoryStatus {
+  id: string;
+  name: string;
+  status: ServiceStatus;
+  components: ComponentStatus[];
+}
+
 interface StatusResponse {
   success: boolean;
   overall: ServiceStatus;
   lastUpdated: string;
-  services: {
-    middleware: {
-      status: ServiceStatus;
-    };
-    discordBot: {
-      status: ServiceStatus;
-    };
-    gameApi: {
-      status: ServiceStatus;
-    };
-    playerTransfer: {
-      status: ServiceStatus;
-    };
-  };
+  categories: CategoryStatus[];
 }
 
-function getStatusIcon(status: ServiceStatus) {
+function getStatusColor(status: ServiceStatus) {
   switch (status) {
     case "operational":
-      return "🟢";
+      return "text-green-400";
     case "degraded":
-      return "🟡";
+      return "text-yellow-400";
     case "outage":
-      return "🔴";
+      return "text-red-400";
+  }
+}
+
+function getStatusDot(status: ServiceStatus) {
+  switch (status) {
+    case "operational":
+      return "bg-green-500";
+    case "degraded":
+      return "bg-yellow-500";
+    case "outage":
+      return "bg-red-500";
   }
 }
 
@@ -41,43 +52,92 @@ function getStatusText(status: ServiceStatus) {
     case "operational":
       return "Operational";
     case "degraded":
-      return "Rerouted";
+      return "Degraded";
     case "outage":
       return "Outage";
   }
 }
 
-function StatusCard({
-  title,
-  status,
+function CategoryCard({
+  category,
 }: {
-  title: string;
-  status: ServiceStatus;
+  category: CategoryStatus;
 }) {
-  return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6">
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold">{title}</h3>
+  const [open, setOpen] = useState(false);
 
-        <div className="flex items-center gap-2">
-          <span>{getStatusIcon(status)}</span>
-          <span className="text-sm text-zinc-400">
-            {getStatusText(status)}
+  return (
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/30">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between p-6 text-left"
+      >
+        <div className="flex items-center gap-4">
+          <span className="text-lg">
+            {open ? "▼" : "▶"}
           </span>
+
+          <h3 className="font-semibold text-lg">
+            {category.name}
+          </h3>
         </div>
-      </div>
+
+        <span
+          className={`font-medium ${getStatusColor(
+            category.status
+          )}`}
+        >
+          {getStatusText(category.status)}
+        </span>
+      </button>
+
+      {open && (
+        <div className="border-t border-zinc-800 px-6 py-4">
+          <div className="space-y-3">
+            {category.components.map((component) => (
+              <div
+                key={component.id}
+                className="flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`h-2.5 w-2.5 rounded-full ${getStatusDot(
+                      component.status
+                    )}`}
+                  />
+
+                  <span>{component.name}</span>
+                </div>
+
+                <span
+                  className={`text-sm ${getStatusColor(
+                    component.status
+                  )}`}
+                >
+                  {getStatusText(component.status)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default function StatusPage() {
-  const [data, setData] = useState<StatusResponse | null>(null);
+  const [data, setData] =
+    useState<StatusResponse | null>(null);
+
   const [loading, setLoading] = useState(true);
-  const [backendOffline, setBackendOffline] = useState(false);
+
+  const [backendOffline, setBackendOffline] =
+    useState(false);
 
   async function fetchStatus() {
     try {
-      const response = await fetch(`${API_URL}/api/status`);
+      const response = await fetch(
+        `${API_URL}/api/status`
+      );
 
       const json = await response.json();
 
@@ -86,25 +146,7 @@ export default function StatusPage() {
     } catch (error) {
       console.error(error);
       setBackendOffline(true);
-      setData({
-        success: false,
-        overall: "outage",
-        lastUpdated: new Date().toISOString(),
-        services: {
-          middleware: {
-            status: "outage",
-          },
-          discordBot: {
-            status: "outage",
-          },
-          gameApi: {
-            status: "outage",
-          },
-          playerTransfer: {
-            status: "outage",
-          },
-        },
-      });
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -113,7 +155,10 @@ export default function StatusPage() {
   useEffect(() => {
     fetchStatus();
 
-    const interval = setInterval(fetchStatus, 30000);
+    const interval = setInterval(
+      fetchStatus,
+      30000
+    );
 
     return () => clearInterval(interval);
   }, []);
@@ -121,7 +166,9 @@ export default function StatusPage() {
   if (loading) {
     return (
       <main className="mx-auto max-w-6xl px-6 py-16">
-        <h1 className="text-4xl font-bold">System Status</h1>
+        <h1 className="text-4xl font-bold">
+          System Status
+        </h1>
 
         <p className="mt-4 text-zinc-400">
           Loading status...
@@ -130,75 +177,73 @@ export default function StatusPage() {
     );
   }
 
-if (!data) {
-  return null;
-}
-
-  return (
-    <main className="mx-auto max-w-6xl px-6 py-16">
-      <div className="mb-12">
-        <h1 className="mb-4 text-4xl font-bold">
+  if (!data) {
+    return (
+      <main className="mx-auto max-w-6xl px-6 py-16">
+        <h1 className="text-4xl font-bold">
           System Status
         </h1>
 
-        <p className="text-zinc-400">
-          Live service availability and infrastructure
-          status for Misfitz Stats.
+        <p className="mt-4 text-red-400">
+          Unable to load status information.
         </p>
+      </main>
+    );
+  }
+
+  return (
+  <main className="mx-auto max-w-6xl px-6 py-16">
+    <div className="mb-12">
+      <h1 className="mb-4 text-4xl font-bold">
+        System Status
+      </h1>
+
+      <p className="text-zinc-400">
+        Live service availability and infrastructure
+        status for Misfitz Stats.
+      </p>
+    </div>
+
+    <div className="mb-12 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-8">
+      <div className="mb-4 flex items-center gap-3">
+        <div
+          className={`h-4 w-4 rounded-full ${getStatusDot(
+            data.overall
+          )}`}
+        />
+
+        <h2 className="text-2xl font-bold">
+          {data.overall === "operational" &&
+            "All Systems Operational"}
+
+          {data.overall === "degraded" &&
+            "Partial Service Disruption"}
+
+          {data.overall === "outage" &&
+            "Major Service Outage"}
+        </h2>
       </div>
 
-      <div className="mb-12 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-8">
-        <div className="mb-4 flex items-center gap-3">
-          <span className="text-2xl">
-            {getStatusIcon(data.overall)}
-          </span>
+      <p className="text-zinc-400">
+        Last Updated:{" "}
+        {new Date(data.lastUpdated).toLocaleString()}
+      </p>
 
-          <h2 className="text-2xl font-bold">
-            {data.overall === "operational" &&
-              "All Systems Operational"}
-
-            {data.overall === "degraded" &&
-              "Partial Service Disruption"}
-
-            {data.overall === "outage" &&
-              "Major Service Outage"}
-          </h2>
-        </div>
-
-        <p className="text-sm text-zinc-400">
-          
-          Last Updated:{" "}
-          {new Date(data.lastUpdated).toLocaleString()}
-        </p>
-        {backendOffline && (
+      {backendOffline && (
         <p className="mt-4 text-red-400">
-          Unable to connect to the backend server.
-          Displaying outage status.
+          Unable to connect to server.
         </p>
       )}
-      </div>
+    </div>
 
-      <div className="grid gap-4">
-        <StatusCard
-          title="Middleware API"
-          status={data.services.middleware.status}
+    <div className="space-y-4">
+      {data.categories.map((category) => (
+        <CategoryCard
+          key={category.id}
+          category={category}
         />
-
-        <StatusCard
-          title="Discord Bot"
-          status={data.services.discordBot.status}
-        />
-
-        <StatusCard
-          title="Misfitz Game API"
-          status={data.services.gameApi.status}
-        />
-
-        <StatusCard
-          title="Player Transfer"
-          status={data.services.playerTransfer.status}
-        />
-      </div>
-    </main>
-  );
+      ))}
+    </div>
+  </main>
+);
 }
