@@ -1,0 +1,237 @@
+import { API_URL } from "@/lib/api";
+
+export interface LinkedAccount {
+  playerId: string;
+  verified: boolean;
+  privacy: "open" | "hidden" | "anonymous" | "private";
+}
+
+export interface Account {
+  provider: string;
+  discordId: string;
+  linkedAccounts: LinkedAccount[];
+  achievements?: unknown[];
+  createdAt?: string | null;
+  lastLogin?: string | null;
+}
+
+interface MeResponse {
+  loggedIn: boolean;
+  account?: Account;
+}
+
+export interface VerificationData {
+  playerId: string;
+  playerName?: string;
+}
+
+export interface VerificationResult {
+  success: boolean;
+  code: string;
+  data?: VerificationData;
+}
+
+
+/*
+ * Authentication
+ */
+
+export async function getCurrentAccount(): Promise<Account | null> {
+  const response = await fetch(
+    `${API_URL}/auth/me`,
+    {
+      credentials: "include"
+    }
+  );
+
+  const data: MeResponse =
+    await response.json();
+
+  if (!data.loggedIn) {
+    return null;
+  }
+
+  return data.account ?? null;
+}
+
+
+/*
+ * Development login
+ *
+ * Only call this from development code.
+ */
+
+export async function devLogin(): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/auth/test-login`,
+    {
+      credentials: "include"
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      "Development login failed."
+    );
+  }
+}
+
+
+/*
+ * Logout
+ */
+
+export async function logout(): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/auth/logout`,
+    {
+      credentials: "include"
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      "Logout failed."
+    );
+  }
+}
+
+
+/*
+ * Verification
+ */
+
+export async function startVerification(
+  playerId: string
+): Promise<VerificationResult> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/verify/start/${encodeURIComponent(
+        playerId
+      )}`,
+      {
+        credentials: "include"
+      }
+    );
+
+  return response.json();
+}
+
+
+export async function checkVerification(): Promise<VerificationResult> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/verify/check`,
+      {
+        credentials: "include"
+      }
+    );
+
+  return response.json();
+}
+
+
+export async function cancelVerification(): Promise<VerificationResult> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/verify`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    );
+
+  return response.json();
+}
+
+
+/*
+ * Account management
+ */
+
+export async function removePlayer(
+  playerId: string
+): Promise<boolean> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/player/${encodeURIComponent(
+        playerId
+      )}`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const data =
+    await response.json();
+
+  return data.success === true;
+}
+
+
+export async function deleteAccount(): Promise<boolean> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/account`,
+      {
+        method: "DELETE",
+        credentials: "include"
+      }
+    );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const data =
+    await response.json();
+
+  return data.success === true;
+}
+
+
+/*
+ * Privacy
+ */
+
+export async function updatePrivacy(
+  playerId: string,
+  privacy: LinkedAccount["privacy"]
+): Promise<boolean> {
+
+  const response =
+    await fetch(
+      `${API_URL}/auth/privacy`,
+      {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body: JSON.stringify({
+          playerId,
+          privacy
+        })
+      }
+    );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const data =
+    await response.json();
+
+  return data.success === true;
+}

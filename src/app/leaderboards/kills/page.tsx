@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import ReportModal from "@/components/reports/ReportModal";
 
 interface LeaderboardEntry {
   rank: number;

@@ -12,10 +12,13 @@ export default function StatsPage() {
   const [error, setError] = useState("");
   const [data, setData] = useState<any>(null);
   const [showGuide, setShowGuide] = useState(false);
-  
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+
+
   function isValidPlayerId(id: string) {
     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z0-9]{10,12}$/.test(id);
   }
+
   useEffect(() => {
 
     const disableContextMenu = (e: MouseEvent) => {
@@ -29,6 +32,31 @@ export default function StatsPage() {
     };
 
   }, []);
+
+useEffect(() => {
+  try {
+    const stored = localStorage.getItem("misfitz_recent_searches");
+
+    if (!stored) {
+      return;
+    }
+
+    const parsed = JSON.parse(stored);
+
+    if (Array.isArray(parsed)) {
+      setRecentSearches(
+        parsed
+          .filter(
+            (id): id is string =>
+              typeof id === "string" && isValidPlayerId(id)
+          )
+          .slice(0, 4)
+      );
+    }
+  } catch {
+    localStorage.removeItem("misfitz_recent_searches");
+  }
+}, []);
 
 useEffect(() => {
 
@@ -66,6 +94,51 @@ useEffect(() => {
 
 }, []);
 
+function addRecentSearch(id: string) {
+  try {
+    const normalizedId = id.trim();
+
+    if (!isValidPlayerId(normalizedId)) {
+      return;
+    }
+
+    const stored = localStorage.getItem(
+      "misfitz_recent_searches"
+    );
+
+    let recent: string[] = [];
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+
+      if (Array.isArray(parsed)) {
+        recent = parsed.filter(
+          (recentId): recentId is string =>
+            typeof recentId === "string" &&
+            isValidPlayerId(recentId)
+        );
+      }
+    }
+
+    const updated = [
+      normalizedId,
+      ...recent.filter(
+        (recentId) => recentId !== normalizedId
+      )
+    ].slice(0, 4);
+
+    localStorage.setItem(
+      "misfitz_recent_searches",
+      JSON.stringify(updated)
+    );
+
+    setRecentSearches(updated);
+
+  } catch {
+    // Ignore localStorage errors.
+  }
+}
+
 async function searchPlayer(searchId?: string, silent = false){
 const input = typeof searchId === "string" ? searchId.trim() : playerId.trim();
   
@@ -78,13 +151,7 @@ const input = typeof searchId === "string" ? searchId.trim() : playerId.trim();
       setError("Please enter a Player ID.");
       return;
     }
-    /*
-      Frontend cooldown [DELETED]
-    */
 
-    /*
-      Auto-add Player:
-    */
     const cleanedId = input.startsWith("Player:")
       ? input
       : `Player:${input}`;
@@ -143,6 +210,7 @@ const playerData = {
 };
 
 setData(playerData);
+addRecentSearch(playerData.playerId);
 
 window.history.replaceState(
   null,
@@ -250,6 +318,29 @@ window.history.replaceState(
 
 
           </div>
+
+          {recentSearches.length > 0 && (
+            <div className="mt-6 w-full max-w-xl">
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/50">
+                Recently Searched
+              </h2>
+
+              <div className="grid grid-cols-3 gap-3">
+                {recentSearches.slice(0, 3).map((id) => (
+                  <button
+                    key={id}
+                    onClick={() => {
+                      setPlayerId(id);
+                      searchPlayer(id);
+                    }}
+                    className="rounded-xl border border-white/10 bg-black/30 px-3 py-3 text-sm font-semibold tracking-wide text-white/80 transition hover:border-lime-400/40 hover:bg-white/10 hover:text-white"
+                  >
+                    {id}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {showGuide && (
             <div className="mt-6 w-full max-w-xl rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5">

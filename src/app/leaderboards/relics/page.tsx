@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import ReportModal from "@/components/reports/ReportModal";
 
 interface LeaderboardEntry {
   rank: number;
@@ -195,31 +196,12 @@ return (
     </main>
 
     {showReportModal && selectedPlayer && (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-        <div className="w-full max-w-md rounded-xl bg-slate-900 p-6 border border-slate-700">
-          <h2 className="text-2xl font-bold">
-            Report Playername
-          </h2>
-          <p className="mt-3 text-slate-400">
-            Player:
-          </p>
-          <p className="font-semibold">
-            {selectedPlayer.player_name}
-          </p>
-          <div className="mt-6 rounded-lg border border-yellow-500 bg-yellow-500/10 p-4 text-sm text-yellow-300">
-            We are sorry. This feature is currently disabled. Report playernames via the support channel at Anthero Studios 
-          </div>
-
-          <div className="mt-6 flex justify-end gap-3">
-            <button
-              onClick={closeReport}
-              className="rounded-lg bg-slate-700 px-4 py-2 hover:bg-slate-600"
-            >
-              Dismiss
-            </button>
-          </div>
-        </div>
-      </div>
+      <ReportModal
+        open={showReportModal}
+        playerId={selectedPlayer.player_id.replace("Player:", "")}
+        playerName={selectedPlayer.player_name}
+        onClose={closeReport}
+      />
     )}
   </>
 );
