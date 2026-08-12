@@ -3,20 +3,27 @@
 import { useEffect, useState } from "react";
 
 const latestUpdate = {
-  version: "v0.3.0",
-  date: "31st July 2026",
+  version: "v0.3.2",
+  date: "12th August 2026",
   changes: [
-    "Support for mobile devices",
-    "Added: Leaderboards",
-    "Added: Navigation for Mobile",
-    "Fixed: Embeds",
-    "Rework: Character page",
-    "Rework: Stats page",
-    "Rework: Header",
-    "Rework: Status page",
+    "Added: Report feature",
+    "Added: Recently searched"
   ],
 };
 const oldUpdates = [
+  {
+    date: "31st July 2026",
+    changes: [
+      "Support for mobile devices",
+      "Added: Leaderboards",
+      "Added: Navigation for Mobile",
+      "Fixed: Embeds",
+      "Rework: Character page",
+      "Rework: Stats page",
+      "Rework: Header",
+      "Rework: Status page",
+    ],
+  },
   {
     date: "19th June 2026",
     changes: [
