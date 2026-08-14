@@ -37,12 +37,10 @@ export interface VerificationResult {
  */
 
 export async function getCurrentAccount(): Promise<Account | null> {
-  const response = await fetch(
-    `${API_URL}/auth/me`,
-    {
-      credentials: "include"
-    }
-  );
+const response = await fetch("/api/auth/me", {
+  credentials: "include",
+  cache: "no-store"
+});
 
   const data: MeResponse =
     await response.json();

@@ -16,10 +16,10 @@ export default function Header() {
   const desktopNavRef = useRef<HTMLDivElement>(null);
   // SPAETER ÄENDERN
 useEffect(() => {
-  fetch(`${API_URL}/auth/me`, {
-    credentials: "include",
-    cache: "no-store"
-  })
+fetch("/api/auth/me", {
+  credentials: "include",
+  cache: "no-store"
+})
     .then((res) => res.json())
     .then((data) => {
       setLoggedIn(data.loggedIn);
