@@ -43,7 +43,14 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    const backendPath = url.pathname.replace(/^\/api/, "") || "/";
+    let backendPath;
+
+    if (url.pathname === "/api/report") {
+      backendPath = "/api/report";
+    } else {
+      backendPath = url.pathname.replace(/^\/api/, "") || "/";
+    }
+
     const backendUrl = new URL(backendPath, BACKEND_URL);
     backendUrl.search = url.search;
 
