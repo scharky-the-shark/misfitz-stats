@@ -405,21 +405,50 @@ return (
               )}
             </button>
 
-            {!loggedIn ? (
-              <button
-                onClick={() => setShowLoginModal(true)}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
-              >
-                Sign In
-              </button>
-            ) : (
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
-              >
-                Account
-              </button>
-            )}
+{!loggedIn ? (
+  <button
+    onClick={() => setShowLoginModal(true)}
+    className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
+  >
+    Sign In
+  </button>
+) : (
+  <>
+    <button
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 transition hover:bg-white/10"
+    >
+      Account
+    </button>
+
+    {menuOpen && (
+      <div className="absolute right-6 top-full mt-3 w-56 rounded-2xl border border-white/10 bg-[#111827]/95 p-2 shadow-2xl backdrop-blur-xl">
+        <a
+          href="/settings"
+          onClick={() => setMenuOpen(false)}
+          className="block rounded-xl px-3 py-2 hover:bg-white/5"
+        >
+          Settings
+        </a>
+
+        <a
+          href="/verification"
+          onClick={() => setMenuOpen(false)}
+          className="block rounded-xl px-3 py-2 hover:bg-white/5"
+        >
+          Verification
+        </a>
+
+        <button
+          onClick={handleLogout}
+          className="mt-2 w-full rounded-xl px-3 py-2 text-left text-red-400 hover:bg-red-500/10"
+        >
+          Logout
+        </button>
+      </div>
+    )}
+  </>
+)}
 
           </div>
         {/* Account Area */}
