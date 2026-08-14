@@ -40,7 +40,7 @@ const resources = [
   },
   {
     title: "Status",
-    desc: "Check if the bt is online",
+    desc: "Check if the bot is online",
     href: "/status",
   },
 ];

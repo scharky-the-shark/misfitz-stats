@@ -5,6 +5,7 @@ import LoginModal from "../LoginModal";
 import { API_URL } from "@/lib/api";
 
 export default function Header() {
+  const [authDebug, setAuthDebug] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -14,9 +15,10 @@ export default function Header() {
   const [canHover, setCanHover] = useState(true);
   const desktopNavRef = useRef<HTMLDivElement>(null);
   // SPAETER ÄENDERN
-  useEffect(() => {
+useEffect(() => {
   fetch(`${API_URL}/auth/me`, {
-    credentials: "include"
+    credentials: "include",
+    cache: "no-store"
   })
     .then((res) => res.json())
     .then((data) => {
@@ -203,6 +205,11 @@ const navigation = [
 return (
   <>
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl">      
+    {authDebug && (
+  <pre className="fixed bottom-4 left-4 z-[99999] max-w-[90vw] rounded-xl bg-black p-4 text-xs text-white">
+    {authDebug}
+  </pre>
+)}
     <div className="relative flex w-full items-center px-6 py-3 lg:px-12">
         {/* Logo */}
         <div className="flex items-center gap-4">

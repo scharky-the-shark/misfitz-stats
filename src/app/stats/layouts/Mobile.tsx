@@ -190,6 +190,12 @@ const input = typeof searchId === "string" ? searchId.trim() : playerId.trim();
         );
       }
 
+      if (response.status === 403) {
+        throw new Error(
+          "Player ID suspended from Misfitz Statz."
+        );
+      }
+
       if (response.status >= 500) {
         throw new Error(
           "The stats server is currently unavailable."

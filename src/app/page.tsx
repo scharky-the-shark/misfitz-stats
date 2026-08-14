@@ -18,14 +18,15 @@ const features = [
     title: "Leaderboards",
     desc: "Track top killers, relic collectors and more.",
   },
-  
-  {
-    title: "(Soon) Meta Maker",
-    desc: "Look up for the meta and simulate you own meta",
-  },
+
   {
     title: "(Soon) Tutorials",
     desc: "Learn mechanics, strategies and advanced gameplay techniques.",
+  },
+
+  {
+    title: "(Soon) Meta Maker",
+    desc: "Look up for the meta and simulate you own meta",
   },
 ];
 
@@ -44,13 +45,6 @@ export default function Home() {
 
   return (
     <main className="relative min-h-fit overflow-hidden bg-[#0b1220] text-white select-none">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,217,255,0.12),transparent_35%)]" />
-
-      <div className="absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
-
-      <div className="absolute bottom-0 left-0 h-[400px] w-[500px] rounded-full bg-[#00D9FF]/10 blur-3xl" />
-
       {/* Hero */}
       <section className="relative mx-auto flex min-h-[48vh] md:min-h-[58vh] max-w-7xl flex-col items-center justify-center px-5 sm:px-6 text-center">
         <div className="mx-auto mt-6 mb-17 max-w-3xl rounded-3xl border border-yellow-500/20 bg-yellow-500/10 p-5 backdrop-blur-xl">
@@ -58,17 +52,6 @@ export default function Home() {
         <h2 className="text-lg font-bold text-yellow-300">
           Website Under Active Development
         </h2>
-
-        <div className="mt-3 space-y-2 text-sm text-white/75">
-          <p>
-            • Mobile support is currently in build
-          </p>
-
-          <p>
-            • Buttons or pages may not function yet
-          </p>
-        </div>
-
       </div>
         <div className="absolute h-[420px] w-[420px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
 

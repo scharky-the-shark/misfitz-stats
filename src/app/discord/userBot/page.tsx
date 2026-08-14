@@ -122,17 +122,6 @@ export default function DiscordPage() {
         Required to create a Misfitz Statz account and content data to your ID
       </p>
     </div>
-
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl">
-      <h3 className="mb-3 text-xl font-semibold">
-        Use Slash Commands
-      </h3>
-
-      <p className="text-white/70">
-        Allows the bot to answer requested
-        statistics inside your server viewable for everyone.
-      </p>
-    </div>
   </div>
 
   <div className="mt-10 rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-8 backdrop-blur-xl">
@@ -312,16 +301,6 @@ export default function DiscordPage() {
 
       <p className="mt-4 text-white/70">
         Everyone can use the bot as long as users are not flagged or suspended from Misfitz Statz.
-      </p>
-    </details>
-
-    <details className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-      <summary className="cursor-pointer list-none text-lg font-semibold">
-        Can I remove the bot later?
-      </summary>
-
-      <p className="mt-4 text-white/70">
-        You can remove the bot from your server at any time. This will not result in deletion of collected server data. Contact us for removal of server data
       </p>
     </details>
 

@@ -17,12 +17,10 @@ export default function Footer() {
 
         <div className="flex flex-wrap items-center gap-6 text-sm text-white/60">
           <a
-            href="https://github.com/scharky-the-shark"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/settings"
             className="hide-under-1050 transition hover:text-[#7CFF00]"
           >
-            GitHub
+            Settings
           </a>
           <a
             href="https://www.antiherostudios.com/en?creatorCode=SCHARKY"
