@@ -92,7 +92,7 @@ export default function SettingsPage() {
       );
 
       const data = await res.json();
-
+console.log("[SETTINGS AUTH]", data);
       if (data.loggedIn) {
         setAccount(data.account);
       } else {
