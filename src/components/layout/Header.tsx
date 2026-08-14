@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../LoginModal";
-import { API_URL } from "@/lib/api";
 
 export default function Header() {
   const [authDebug, setAuthDebug] = useState("");
@@ -61,9 +60,10 @@ useEffect(() => {
 
 const handleLogout = async () => {
   await fetch(
-    `${API_URL}/auth/logout`,
+    "/api/auth/logout",
     {
-      credentials: "include"
+      credentials: "include",
+      cache: "no-store"
     }
   );
 

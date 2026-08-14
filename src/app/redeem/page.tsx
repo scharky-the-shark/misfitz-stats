@@ -38,9 +38,10 @@ export default function VerificationPage() {
 }
 
     fetch(
-      `${API_URL}/auth/me`,
+      "/api/auth/me",
       {
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     )
       .then((res) => res.json())
@@ -61,7 +62,7 @@ export default function VerificationPage() {
   async function removePlayer(playerId: string) {
 
     await fetch(
-      `${API_URL}/auth/player/${playerId}`,
+      `/api/auth/player/${playerId}`,
       {
         method: "DELETE",
         credentials: "include"
@@ -69,9 +70,10 @@ export default function VerificationPage() {
     );
 
     const response = await fetch(
-      `${API_URL}/auth/me`,
+      "/api/auth/me",
       {
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 

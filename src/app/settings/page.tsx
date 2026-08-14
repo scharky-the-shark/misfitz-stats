@@ -5,7 +5,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import DeleteAccountModal from "@/components/settings/DeleteAccountModal";
-import { API_URL } from "@/lib/api";
 
 type PrivacyLevel =
   | "open"
@@ -85,9 +84,10 @@ export default function SettingsPage() {
   async function loadAccount() {
     try {
       const res = await fetch(
-        `${API_URL}/auth/me`,
+        "/api/auth/me",
         {
-          credentials: "include"
+          credentials: "include",
+          cache: "no-store"
         }
       );
 
@@ -150,7 +150,7 @@ console.log("[SETTINGS AUTH]", data);
       setSavingPlayer(playerId);
 
       const res = await fetch(
-        `${API_URL}/auth/privacy`,
+        "/api/auth/privacy",
         {
           method: "PATCH",
           credentials: "include",
@@ -195,10 +195,11 @@ console.log("[SETTINGS AUTH]", data);
   async function deleteAccount() {
     try {
       const res = await fetch(
-        `${API_URL}/auth/account`,
+        "/api/auth/account",
         {
           method: "DELETE",
-          credentials: "include"
+          credentials: "include",
+          cache: "no-store"
         }
       );
 

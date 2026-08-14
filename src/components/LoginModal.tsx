@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { API_URL } from "@/lib/api";
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -31,7 +30,7 @@ export default function LoginModal({
     if (!accepted) return;
 
     window.location.href =
-      `${API_URL}/auth/discord`;
+      "/api/auth/discord";
   };
 
 return (

@@ -1,5 +1,3 @@
-import { API_URL } from "@/lib/api";
-
 export interface LinkedAccount {
   playerId: string;
   verified: boolean;
@@ -37,7 +35,7 @@ export interface VerificationResult {
  */
 
 export async function getCurrentAccount(): Promise<Account | null> {
-const response = await fetch("/api/auth/me", {
+  const response = await fetch("/api/auth/me", {
   credentials: "include",
   cache: "no-store"
 });
@@ -61,9 +59,10 @@ const response = await fetch("/api/auth/me", {
 
 export async function devLogin(): Promise<void> {
   const response = await fetch(
-    `${API_URL}/auth/test-login`,
+    "/api/auth/test-login",
     {
-      credentials: "include"
+      credentials: "include",
+      cache: "no-store"
     }
   );
 
@@ -81,9 +80,10 @@ export async function devLogin(): Promise<void> {
 
 export async function logout(): Promise<void> {
   const response = await fetch(
-    `${API_URL}/auth/logout`,
+    "/api/auth/logout",
     {
-      credentials: "include"
+      credentials: "include",
+      cache: "no-store"
     }
   );
 
@@ -105,11 +105,12 @@ export async function startVerification(
 
   const response =
     await fetch(
-      `${API_URL}/auth/verify/start/${encodeURIComponent(
+      `/api/auth/verify/start/${encodeURIComponent(
         playerId
       )}`,
       {
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 
@@ -121,9 +122,10 @@ export async function checkVerification(): Promise<VerificationResult> {
 
   const response =
     await fetch(
-      `${API_URL}/auth/verify/check`,
+      "/api/auth/verify/check",
       {
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 
@@ -135,10 +137,11 @@ export async function cancelVerification(): Promise<VerificationResult> {
 
   const response =
     await fetch(
-      `${API_URL}/auth/verify`,
+      "/api/auth/verify",
       {
         method: "DELETE",
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 
@@ -156,12 +159,13 @@ export async function removePlayer(
 
   const response =
     await fetch(
-      `${API_URL}/auth/player/${encodeURIComponent(
+      `/api/auth/player/${encodeURIComponent(
         playerId
       )}`,
       {
         method: "DELETE",
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 
@@ -180,10 +184,11 @@ export async function deleteAccount(): Promise<boolean> {
 
   const response =
     await fetch(
-      `${API_URL}/auth/account`,
+      "/api/auth/account",
       {
         method: "DELETE",
-        credentials: "include"
+        credentials: "include",
+        cache: "no-store"
       }
     );
 
@@ -209,10 +214,11 @@ export async function updatePrivacy(
 
   const response =
     await fetch(
-      `${API_URL}/auth/privacy`,
+      "/api/auth/privacy",
       {
         method: "PATCH",
         credentials: "include",
+        cache: "no-store",
         headers: {
           "Content-Type":
             "application/json"

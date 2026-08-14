@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { API_URL } from "@/lib/api";
 
 interface ReportModalProps {
 open: boolean;
@@ -101,9 +100,10 @@ setAuthLoading(true);
 
 try {
   const response = await fetch(
-    `${API_URL}/auth/me`,
+    "/api/auth/me",
     {
-      credentials: "include"
+      credentials: "include",
+      cache: "no-store"
     }
   );
 
@@ -170,10 +170,11 @@ setMessage("");
 
 try {
   const response = await fetch(
-    `${API_URL}/api/report`,
+    "/api/report",
     {
       method: "POST",
       credentials: "include",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json"
       },
