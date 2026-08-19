@@ -35,7 +35,7 @@ export interface VerificationResult {
  */
 import { notifyAuthInvalid } from "@/lib/authEvents";
 
-async function authFetch(
+export async function authFetch(
   input: RequestInfo | URL,
   init?: RequestInit
 ): Promise<Response> {
