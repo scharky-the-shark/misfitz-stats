@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@/lib/AuthContext";
 
 interface ReportModalProps {
 open: boolean;
@@ -42,26 +43,17 @@ label: "Other"
 }
 ];
 
-interface AuthState {
-loggedIn: boolean;
-userId?: string;
-}
-
 export default function ReportModal({
-open,
-playerId,
-playerName,
-onClose
+  open,
+  playerId,
+  playerName,
+  onClose
 }: ReportModalProps) {
-const [auth, setAuth] = useState<AuthState>({
-loggedIn: false
-});
 
-const [authLoading, setAuthLoading] =
-useState(true);
+  const { loggedIn } = useAuth();
 
-const [reason, setReason] =
-useState<ReportReason | "">("");
+  const [reason, setReason] =
+    useState<ReportReason | "">("");
 
 const [showDisclaimer, setShowDisclaimer] =
 useState(false);
@@ -91,52 +83,8 @@ const disclaimerAccepted =
 
 setShowDisclaimer(!disclaimerAccepted);
 
-loadAuth();
-
 }, [open]);
 
-async function loadAuth() {
-setAuthLoading(true);
-
-try {
-  const response = await fetch(
-    "/api/auth/me",
-    {
-      credentials: "include",
-      cache: "no-store"
-    }
-  );
-
-  if (!response.ok) {
-    setAuth({
-      loggedIn: false
-    });
-    return;
-  }
-
-  const data = await response.json();
-
-  if (data.loggedIn) {
-    setAuth({
-      loggedIn: true,
-      userId: data.account?.discordId
-    });
-  } else {
-    setAuth({
-      loggedIn: false
-    });
-  }
-} catch (error) {
-  console.error(error);
-
-  setAuth({
-    loggedIn: false
-  });
-} finally {
-  setAuthLoading(false);
-}
-
-}
 
 function acceptDisclaimer() {
 localStorage.setItem(
@@ -149,7 +97,7 @@ setShowDisclaimer(false);
 }
 
 async function submitReport() {
-if (!auth.loggedIn) {
+if (!loggedIn) {
 setMessageType("error");
 setMessage(
 "You must be logged in to submit a report."
@@ -370,7 +318,7 @@ onClose();
 
         {/* LOGIN STATUS */}
 
-        {!authLoading && !auth.loggedIn && (
+        {!loggedIn && (
 
           <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4">
 
@@ -429,8 +377,7 @@ onClose();
           <button
             onClick={submitReport}
             disabled={
-              authLoading ||
-              !auth.loggedIn ||
+              !loggedIn ||
               !reason ||
               submitting
             }
