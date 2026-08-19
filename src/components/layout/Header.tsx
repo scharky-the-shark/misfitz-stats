@@ -2,31 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../LoginModal";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function Header() {
+  const { loggedIn, clearAuth } = useAuth();
   const [authDebug, setAuthDebug] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const [canHover, setCanHover] = useState(true);
   const desktopNavRef = useRef<HTMLDivElement>(null);
   // SPAETER ÄENDERN
-useEffect(() => {
-fetch("/api/auth/me", {
-  credentials: "include",
-  cache: "no-store"
-})
-    .then((res) => res.json())
-    .then((data) => {
-      setLoggedIn(data.loggedIn);
-    })
-    .catch(() => {
-      setLoggedIn(false);
-    });
-}, []);
 
 useEffect(() => {
   const media = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -59,15 +47,12 @@ useEffect(() => {
 }, []);
 
 const handleLogout = async () => {
-  await fetch(
-    "/api/auth/logout",
-    {
-      credentials: "include",
-      cache: "no-store"
-    }
-  );
+  await fetch("/api/auth/logout", {
+    credentials: "include",
+    cache: "no-store"
+  });
 
-  setLoggedIn(false);
+  clearAuth();
   setMenuOpen(false);
 };
 

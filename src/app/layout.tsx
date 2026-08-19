@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import DeviceGuard from "../components/DeviceGuard";
+import { AuthProvider } from "@/lib/AuthContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://misfitz-stats.pages.dev"),
@@ -47,17 +48,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#0B0F19] text-white">
-        <div className="flex min-h-screen flex-col">
+<AuthProvider>
+  <div className="flex min-h-screen flex-col">
 
-          <Header />
+    <Header />
 
-          <main className="flex-1">
-            {children}
-          </main>
+    <main className="flex-1">
+      {children}
+    </main>
 
-          <Footer />
+    <Footer />
 
-        </div>
+  </div>
+</AuthProvider>
 
       </body>
     </html>

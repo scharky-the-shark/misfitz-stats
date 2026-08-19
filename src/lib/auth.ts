@@ -33,6 +33,24 @@ export interface VerificationResult {
 /*
  * Authentication
  */
+import { notifyAuthInvalid } from "@/lib/authEvents";
+
+async function authFetch(
+  input: RequestInfo | URL,
+  init?: RequestInit
+): Promise<Response> {
+  const response = await fetch(input, {
+    ...init,
+    credentials: "include",
+    cache: "no-store"
+  });
+
+  if (response.status === 401) {
+    notifyAuthInvalid();
+  }
+
+  return response;
+}
 
 export async function getCurrentAccount(): Promise<Account | null> {
   const response = await fetch("/api/auth/me", {
@@ -103,16 +121,9 @@ export async function startVerification(
   playerId: string
 ): Promise<VerificationResult> {
 
-  const response =
-    await fetch(
-      `/api/auth/verify/start/${encodeURIComponent(
-        playerId
-      )}`,
-      {
-        credentials: "include",
-        cache: "no-store"
-      }
-    );
+const response = await authFetch(
+  `/api/auth/verify/start/${encodeURIComponent(playerId)}`
+);
 
   return response.json();
 }
@@ -120,14 +131,9 @@ export async function startVerification(
 
 export async function checkVerification(): Promise<VerificationResult> {
 
-  const response =
-    await fetch(
-      "/api/auth/verify/check",
-      {
-        credentials: "include",
-        cache: "no-store"
-      }
-    );
+const response = await authFetch(
+  "/api/auth/verify/check"
+);
 
   return response.json();
 }
@@ -135,15 +141,12 @@ export async function checkVerification(): Promise<VerificationResult> {
 
 export async function cancelVerification(): Promise<VerificationResult> {
 
-  const response =
-    await fetch(
-      "/api/auth/verify",
-      {
-        method: "DELETE",
-        credentials: "include",
-        cache: "no-store"
-      }
-    );
+const response = await authFetch(
+  "/api/auth/verify",
+  {
+    method: "DELETE"
+  }
+);
 
   return response.json();
 }
@@ -157,17 +160,12 @@ export async function removePlayer(
   playerId: string
 ): Promise<boolean> {
 
-  const response =
-    await fetch(
-      `/api/auth/player/${encodeURIComponent(
-        playerId
-      )}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-        cache: "no-store"
-      }
-    );
+  const response = await authFetch(
+    `/api/auth/player/${encodeURIComponent(playerId)}`,
+    {
+      method: "DELETE"
+    }
+  );
 
   if (!response.ok) {
     return false;
@@ -182,15 +180,12 @@ export async function removePlayer(
 
 export async function deleteAccount(): Promise<boolean> {
 
-  const response =
-    await fetch(
-      "/api/auth/account",
-      {
-        method: "DELETE",
-        credentials: "include",
-        cache: "no-store"
-      }
-    );
+  const response = await authFetch(
+    "/api/auth/account",
+    {
+      method: "DELETE"
+    }
+  );
 
   if (!response.ok) {
     return false;
@@ -212,23 +207,19 @@ export async function updatePrivacy(
   privacy: LinkedAccount["privacy"]
 ): Promise<boolean> {
 
-  const response =
-    await fetch(
-      "/api/auth/privacy",
-      {
-        method: "PATCH",
-        credentials: "include",
-        cache: "no-store",
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-        body: JSON.stringify({
-          playerId,
-          privacy
-        })
-      }
-    );
+  const response = await authFetch(
+    "/api/auth/privacy",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        playerId,
+        privacy
+      })
+    }
+  );
 
   if (!response.ok) {
     return false;
