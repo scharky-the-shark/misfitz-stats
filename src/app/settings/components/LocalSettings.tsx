@@ -41,6 +41,24 @@ export default function LocalSettings() {
     }
   }
 
+  function resetLoginDisclaimer() {
+    try {
+      localStorage.removeItem(
+        "login_disclaimer"
+      );
+
+      setMessage(
+        "Login disclaimer reset."
+      );
+    } catch (error) {
+      console.error(error);
+
+      setMessage(
+        "Failed to reset login disclaimer."
+      );
+    }
+  }
+
   return (
     <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
       <p className="text-sm font-semibold uppercase tracking-wider text-white/40">
@@ -69,6 +87,13 @@ export default function LocalSettings() {
           description="Shows the report information again the next time you open the report feature."
           button="Reset"
           onClick={resetReportDisclaimer}
+        />
+
+        <SettingAction
+          title="Reset login disclaimer"
+          description="Shows the Terms of Service and Privacy Policy confirmation again the next time you sign in."
+          button="Reset"
+          onClick={resetLoginDisclaimer}
         />
       </div>
 

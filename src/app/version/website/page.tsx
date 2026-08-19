@@ -3,14 +3,25 @@
 import { useEffect, useState } from "react";
 
 const latestUpdate = {
-  version: "v0.3.2",
-  date: "12th August 2026",
+  version: "v0.3.4",
+  date: "19th August 2026",
   changes: [
-    "Added: Report feature",
-    "Added: Recently searched"
+    "Fixed: Header and Footer UI on mobile",
+    "Fixed: Login Informations storage on client side",
+    "Fixed: Traffic improvements",
+    "Fixed: Background design on many pages",
+    "Rework: Settings menu remodelled",
+    "Rework: Save settings changes"
   ],
 };
 const oldUpdates = [
+  {
+    date: "12th August 2026",
+    changes: [
+      "Added: Report feature",
+      "Added: Recently searched"
+    ],
+  },
   {
     date: "31st July 2026",
     changes: [
@@ -27,15 +38,15 @@ const oldUpdates = [
   {
     date: "19th June 2026",
     changes: [
-    "Added stats for each Misfit",
+    "Added: Stats for each Misfit",
     ],
   },
   {
     date: "14th July 2026",
     changes: [
-      "Added pages to add the bot to a server",
-      "Added page to choose which bot version is preferred",
-      "Damage stats for each Misfit is now shown"
+      "Added: Pages to add the bot to a server or account",
+      "Added: Page to choose which bot version is preferred",
+      "Fixed: Damage stats for each Misfit is now shown"
     ],
   }
 ];
