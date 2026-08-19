@@ -41,16 +41,6 @@ export default function AccountSettings({
             Your Misfitz Statz account is connected.
           </p>
         </div>
-
-        <div className="rounded-2xl border border-lime-400/20 bg-lime-400/10 px-5 py-4">
-          <p className="text-xs uppercase tracking-wider text-lime-300/60">
-            Provider
-          </p>
-
-          <p className="mt-1 font-semibold text-lime-300">
-            {account.provider}
-          </p>
-        </div>
       </div>
     </section>
   );
