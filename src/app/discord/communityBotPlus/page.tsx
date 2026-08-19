@@ -13,12 +13,6 @@ import {
 export default function DiscordPage() {
   return (
     <main className="relative min-h-fit overflow-hidden bg-[#0b1220] text-white select-none">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,217,255,0.12),transparent_35%)]" />
-
-      <div className="absolute right-0 top-0 h-[700px] w-[700px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
-
-      <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[#00D9FF]/10 blur-3xl" />
 
       {/* Hero */}
 <section className="relative mx-auto flex max-w-7xl flex-col items-center px-6 pt-20 text-center">
