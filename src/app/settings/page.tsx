@@ -17,8 +17,12 @@ type PrivacyLevel =
   | "private";
 
 export default function SettingsPage() {
-  const { loggedIn, account, loading } = useAuth();
-
+const {
+  loggedIn,
+  account,
+  loading,
+  setAuth
+} = useAuth();
   const [pendingPrivacy, setPendingPrivacy] =
     useState<Record<string, PrivacyLevel>>({});
 
@@ -101,6 +105,26 @@ export default function SettingsPage() {
           );
         }
       }
+
+      const updatedLinkedAccounts =
+        account.linkedAccounts.map((linkedAccount) => {
+          const newPrivacy =
+            pendingPrivacy[linkedAccount.playerId];
+
+          if (newPrivacy === undefined) {
+            return linkedAccount;
+          }
+
+          return {
+            ...linkedAccount,
+            privacy: newPrivacy
+          };
+        });
+
+      setAuth({
+        ...account,
+        linkedAccounts: updatedLinkedAccounts
+      });
 
       setPendingPrivacy({});
       setSaveMessage("Changes saved.");
