@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@mcp-b/webmcp-polyfill": "^5.0.1",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.24.0",
     "next": "^16.2.6",
@@ -16,6 +17,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@mcp-b/webmcp-types": "^5.0.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
