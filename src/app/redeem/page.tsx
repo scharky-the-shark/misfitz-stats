@@ -186,7 +186,7 @@ export default function VerificationPage() {
         <div className="mt-12 flex h-40 items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02]">
           <div className="text-center">
             <h3 className="text-3xl font-black tracking-wider text-lime-400">
-              Coming soon
+              Suprise and shine
             </h3>
           </div>
         </div>
