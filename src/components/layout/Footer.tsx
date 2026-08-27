@@ -94,8 +94,8 @@ export default function Footer() {
 
           <div className="flex justify-center gap-6 text-white/60">
 
-            <a href="/status" className="transition hover:text-[#7CFF00]">
-              Status
+            <a href="/settings" className="transition hover:text-[#7CFF00]">
+              Settings
             </a>
 
             <a href="/privacy" className="transition hover:text-[#7CFF00]">
