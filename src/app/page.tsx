@@ -20,6 +20,11 @@ const features = [
   },
 
   {
+    title: "Sneak Peeks",
+    desc: "Sneak Peeks for pre Alpha 6 are out.",
+  },
+
+  {
     title: "(Soon) Tutorials",
     desc: "Learn mechanics, strategies and advanced gameplay techniques.",
   },
