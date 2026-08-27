@@ -21,6 +21,19 @@ interface LeaderboardResponse {
   data: LeaderboardEntry[];
 }
 
+const playerInputSchema = {
+  type: "object",
+  properties: {
+    player_id: {
+      type: "string",
+      description:
+        "The Misfitz player ID. Use the player_id returned by get_leaderboard when searching by player name or use the ID that a user has sent.",
+    },
+  },
+  required: ["player_id"],
+  additionalProperties: false,
+} as const satisfies JsonSchemaForInference;
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const inputSchema = {
@@ -74,4 +87,26 @@ export function initializeMisfitzWebMCP() {
       return data;
     },
   });
+
+modelContext.registerTool({
+  name: "get_player",
+
+  description:  "Get public Misfitz player stats using a Misfitz player ID. If the user provides a player name instead of an ID, first use get_leaderboard to find the matching player_name and obtain its player_id, then use that player_id with this tool. If the user provides a player ID directly, use it without calling get_leaderboard first. Do not use Discord IDs. Privacy is enforced by the Misfitz Statz API.",
+
+  inputSchema: playerInputSchema,
+
+  execute: async ({ player_id }) => {
+    const response = await fetch(
+      `${API_URL}/api/player/Player:${encodeURIComponent(player_id)}`
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch player stats: ${response.status}`
+      );
+    }
+
+    return await response.json();
+  },
+});
 }

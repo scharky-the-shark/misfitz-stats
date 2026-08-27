@@ -3,18 +3,27 @@
 import { useEffect, useState } from "react";
 
 const latestUpdate = {
-  version: "v0.3.4",
-  date: "19th August 2026",
+  version: "v0.4.1",
+  date: "27th August 2026",
   changes: [
-    "Fixed: Header and Footer UI on mobile",
-    "Fixed: Login Informations storage on client side",
-    "Fixed: Traffic improvements",
-    "Fixed: Background design on many pages",
-    "Rework: Settings menu remodelled",
-    "Rework: Save settings changes"
+    "Added: WebMCP for agents to use leaderboards",
+    "Added: WebMCP for agents to use playerdata",
+    "Fixed: Login Informations expire",
+    "Fixed: Footer for mobile",
   ],
 };
 const oldUpdates = [
+  {
+    date: "19th August 2026",
+    changes: [
+      "Fixed: Header and Footer UI on mobile",
+      "Fixed: Login Informations storage on client side",
+      "Fixed: Traffic improvements",
+      "Fixed: Background design on many pages",
+      "Rework: Settings menu remodelled",
+      "Rework: Save settings changes"
+    ],
+  },
   {
     date: "12th August 2026",
     changes: [
