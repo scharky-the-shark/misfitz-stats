@@ -78,6 +78,8 @@ const mobileNavigation = [
         label: "Characters",
         href: "/game/misfits",
       },
+      { label: "Meta Stats", 
+        href: "/game/meta" },
       {
         label: "Relics",
         href: "https://misfitz.fandom.com/wiki/Relics",
@@ -88,7 +90,7 @@ const mobileNavigation = [
       },
       {
         label: "Sneak Peeks",
-        href: "/game/sneaky",
+        href: "/game/sneak-peeks",
       },
     ],
   },
@@ -145,9 +147,10 @@ const navigation = [
     color: "#7CFF00",
     items: [
       { label: "Characters", href: "/game/misfits" },
+      { label: "Meta Stats", href: "/game/meta" },
       { label: "Relics", href: "https://misfitz.fandom.com/wiki/Relics" },
       { label: "Map", href: "https://misfitz.fandom.com/wiki/Zero_City" },
-      { label: "Sneak Peeks", href: "/game/sneaky" },
+      { label: "Sneak Peeks", href: "/game/sneak-peeks" },
     ],
   },
   {
@@ -210,7 +213,7 @@ return (
             </p>
 
             <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-              The 1st working tracker
+              The only working tracker
             </p>
           </div>
         </div>
@@ -218,7 +221,7 @@ return (
         {/* Navigation */}
           <nav
             ref={desktopNavRef}
-            className="ml-auto mr-4 hidden items-center gap-8 lg:flex"
+            className="ml-auto mr-4 hidden items-center gap-8 xl:flex"
           >          
           {navigation.map((section) => {
             if (section.items.length === 0) {
@@ -288,7 +291,7 @@ return (
         </nav>
         {/* Mobile Menu Button */}
           {mobileMenuOpen && (
-            <div className="absolute left-0 top-full z-50 w-full border-t border-white/10 bg-[#111827]/95 backdrop-blur-xl lg:hidden">
+            <div className="absolute left-0 top-full z-50 w-full border-t border-white/10 bg-[#111827]/95 backdrop-blur-xl xl:hidden">
               <div className="p-4">
 
                 {mobileNavigation.map((section) => (
@@ -350,7 +353,7 @@ return (
             </div>
           )}
 
-          <div className="ml-auto flex items-center gap-3 lg:hidden">
+          <div className="ml-auto flex items-center gap-3 xl:hidden">
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -424,6 +427,14 @@ return (
           Verification
         </a>
 
+        <a
+          href="/redeem"
+          onClick={() => setMenuOpen(false)}
+          className="block rounded-xl px-3 py-2 hover:bg-white/5"
+        >
+          Redeem a Code
+        </a>
+
         <button
           onClick={handleLogout}
           className="mt-2 w-full rounded-xl px-3 py-2 text-left text-red-400 hover:bg-red-500/10"
@@ -437,7 +448,7 @@ return (
 
           </div>
         {/* Account Area */}
-      <div className="relative ml-8 hidden lg:block">
+      <div className="relative ml-8 hidden xl:block">
             {!loggedIn ? (
         <button
           onClick={() => {

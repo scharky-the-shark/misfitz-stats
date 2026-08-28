@@ -301,7 +301,7 @@ export default function PrivacyPage() {
             <p>
               Discord:{" "}
               <a
-              href="https://discord.gg/M2CmcRwu"
+              href="https://discord.com/users/1280882903567568922"
               className="font-medium transition text-[#7CFF00]"
               >
                 @scharky_the_shark_official
@@ -310,10 +310,10 @@ export default function PrivacyPage() {
             <p>
               Official Misfitz Stats Discord Server:{" "}
               <a
-              href="https://discord.gg/bb9bGA9HW4"
+              href="https://discord.gg/jwSeHD9BrA"
               className="font-medium transition text-[#7CFF00]"
               >
-                https://discord.gg/bb9bGA9HW4
+                https://discord.gg/jwSeHD9BrA
               </a>
             </p>
 

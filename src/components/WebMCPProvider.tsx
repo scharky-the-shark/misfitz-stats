@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { initializeMisfitzWebMCP } from "@/lib/webmcp";
 
 export default function WebMCPProvider() {
-  useEffect(() => {
-    initializeMisfitzWebMCP();
-  }, []);
+const initialized = useRef(false);
 
-  return null;
+useEffect(() => {
+if (initialized.current) {
+return;
+}
+
+initialized.current = true;
+
+initializeMisfitzWebMCP();
+
+}, []);
+
+return null;
 }

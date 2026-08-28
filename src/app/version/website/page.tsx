@@ -3,16 +3,25 @@
 import { useEffect, useState } from "react";
 
 const latestUpdate = {
-  version: "v0.4.1",
-  date: "27th August 2026",
+  version: "v0.5",
+  date: "28th August 2026",
   changes: [
-    "Added: WebMCP for agents to use leaderboards",
-    "Added: WebMCP for agents to use playerdata",
-    "Fixed: Login Informations expire",
-    "Fixed: Footer for mobile",
+    "Added: Sneak Peek page",
+    "Fixed: Support Server invite",
+    "Fixed: linking in Legal page",
+    "Fixed: Description for installing Bot",
   ],
 };
 const oldUpdates = [
+  {
+    date: "27th August 2026",
+    changes: [
+      "Added: WebMCP for agents to use leaderboards",
+      "Added: WebMCP for agents to use playerdata",
+      "Fixed: Login Informations expire",
+      "Fixed: Footer for mobile",
+    ],
+  },
   {
     date: "19th August 2026",
     changes: [

@@ -75,7 +75,7 @@ export default function LegalPage() {
             <div>
               <p className="text-sm text-zinc-400">Discord</p>
               <a
-                href="https://discord.gg/M2CmcRwu"
+                href="https://discord.com/users/1280882903567568922"
                 className="font-medium transition text-[#7CFF00]"
               >
                 @scharky_the_shark_official
@@ -87,10 +87,10 @@ export default function LegalPage() {
                 Official Discord Server
               </p>
               <a
-              href="https://discord.gg/bb9bGA9HW4"
+              href="https://discord.gg/jwSeHD9BrA"
               className="font-medium transition text-[#7CFF00]"
             >
-              https://discord.gg/bb9bGA9HW4
+              https://discord.gg/jwSeHD9BrA
             </a>
             </div>
           </div>
@@ -313,7 +313,7 @@ export default function LegalPage() {
           </a>
           <p> </p>
           <a
-            href="https://discord.gg/M2CmcRwu"
+            href="https://discord.com/users/1280882903567568922"
             className="font-medium transition text-[#7CFF00]"
           >
             Discord: @scharky_the_shark_official

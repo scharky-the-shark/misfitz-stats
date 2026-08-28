@@ -21,7 +21,7 @@ const resources = [
   {
     title: "Support",
     desc: "Get help for Misfitz Statz Bot",
-    href: "https://discord.gg/74suQKzBkp",
+    href: "https://discord.gg/jwSeHD9BrA",
   },
   {
     title: "Privacy Policy",
@@ -111,7 +111,7 @@ export default function DiscordPage() {
           </p>
 
           <Link
-            href="https://discord.gg/74suQKzBkp"
+            href="https://discord.gg/jwSeHD9BrA"
             className="inline-flex rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold backdrop-blur-xl transition hover:border-[#7CFF00] hover:bg-[#7CFF00]/10"
           >
             Join Support Server

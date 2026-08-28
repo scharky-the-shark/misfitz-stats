@@ -64,7 +64,7 @@ export default function DiscordInstallPage() {
         </p>
         {/* Button */}
         <Link
-          href="https://discord.gg/74suQKzBkp"
+          href="https://discord.gg/jwSeHD9BrA"
           className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-lg font-semibold backdrop-blur-xl transition-all hover:border-[#7CFF00]/50 hover:bg-white/10"
         >
           Join Crash Test Server

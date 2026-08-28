@@ -306,7 +306,7 @@ export default function DiscordPage() {
       <p className="mt-4 text-white/70">
         The best way for fast support is to join our
         {" "}
-        <Link href="https://discord.gg/74suQKzBkp" className="underline hover:text-white">
+        <Link href="https://discord.gg/jwSeHD9BrA" className="underline hover:text-white">
           Support Server
         </Link>
       </p>

@@ -122,7 +122,7 @@ const topics: SneakPeekTopic[] = [
     title: "Animations",
     slug: "animations",
     description:
-      "New animations and visual work for several Misfitz, including Beat, Ray, Rush and Shade.",
+      "New animations and visual work for several Misfits, including Beat, Ray, Rush and Shade.",
     tags: [
       "animations",
       "animation",

@@ -27,12 +27,7 @@ const features = [
   {
     title: "(Soon) Tutorials",
     desc: "Learn mechanics, strategies and advanced gameplay techniques.",
-  },
-
-  {
-    title: "(Soon) Meta Maker",
-    desc: "Look up for the meta and simulate you own meta",
-  },
+  }
 ];
 
 export default function Home() {
