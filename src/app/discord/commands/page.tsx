@@ -89,121 +89,78 @@ const commands = [
 ];
 
 export default function DiscordCommandsPage() {
-  return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0b1220] text-white">
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-0 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute right-0 top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-lime-500/10 blur-3xl" />
-      </div>
+return (
+<main className="relative min-h-screen overflow-hidden bg-[#0b1220] text-white">
+  <section className="relative mx-auto max-w-7xl px-6 pt-24 text-center">
+    <div className="mb-4 text-sm uppercase tracking-[0.35em] text-white/50">
+      Discord Commands
+    </div>
 
-      {/* Hero */}
-      <section className="relative mx-auto max-w-7xl px-6 pt-24 text-center">
-        <div className="mb-4 text-sm uppercase tracking-[0.35em] text-white/50">
-          Discord Commands
-        </div>
+    <h1 className="mb-6 text-5xl font-black uppercase md:text-7xl">
+      WHAT THE BOT
+      <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
+        OFFERS
+      </span>
+    </h1>
 
-        <h1 className="mb-6 text-5xl font-black uppercase md:text-7xl">
-          WHAT THE BOT
-          <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
-            OFFERS
-          </span>
-        </h1>
+    <p className="mx-auto max-w-3xl text-lg text-white/70">
+      Explore player statistics, collections, leaderboards,
+      tracking and account management directly from Discord.
+    </p>
 
-        <p className="mx-auto max-w-3xl text-lg text-white/70">
-          Explore player statistics, collections, leaderboards,
-          tracking and account management directly from Discord.
-        </p>
+    <h1 className="bold md:text-4xl block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
+      Enhance the full power of Misfitz Statz
+    </h1>      
+  </section>
 
-        <h1 className="bold md:text-4xl block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
-          Enhance the full power of Misfitz Statz
-        </h1>
-      
-      </section>
-
-      {/* Commands Grid */}
-      <section className="relative mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {commands.map((item) => (
-            <div
-              key={item.command}
-              className="
-                rounded-3xl
-                border
-                border-white/10
-                bg-white/5
-                p-6
-                backdrop-blur-xl
-                transition
-                duration-300
-
-              "
-            >
-              <h2 className="mb-4 text-2xl font-bold text-[#7CFF00]">
-                {item.command}
-              </h2>
-
-              <ul className="space-y-2 text-white/75">
-                {item.description.map((line) => (
-                  <li key={line}>• {line}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative mx-auto max-w-4xl px-6 pb-24">
-        <div className="rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-10 text-center backdrop-blur-xl">
-          <h2 className="mb-4 text-4xl font-bold">
-            Ready to get started?
+  <section className="relative mx-auto max-w-7xl px-6 py-16">
+    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {commands.map((item) => (
+        <div
+          key={item.command}
+          className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition duration-300"
+        >
+          <h2 className="mb-4 text-2xl font-bold text-[#7CFF00]">
+            {item.command}
           </h2>
-
-          <p className="mx-auto mb-8 max-w-2xl text-white/70">
-            Install the Misfitz Discord Bot and access statistics,
-            collections, leaderboards and tracking directly from Discord.
-          </p>
-
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <Link
-              href="/discord/install"
-              className="
-                rounded-2xl
-                border
-                border-white/15
-                bg-white/5
-                px-8
-                py-4
-                font-semibold
-                backdrop-blur-xl
-                transition
-                hover:border-[#7CFF00]/50
-              "
-            >
-              Add to Discord Server
-            </Link>
-
-            <Link
-              href="/discord/install"
-              className="
-                rounded-2xl
-                border
-                border-white/15
-                bg-white/5
-                px-8
-                py-4
-                font-semibold
-                backdrop-blur-xl
-                transition
-                hover:border-[#00D9FF]/50
-              "
-            >
-              User Install
-            </Link>
-          </div>
+          <ul className="space-y-2 text-white/75">
+            {item.description.map((line) => (
+              <li key={line}>• {line}</li>
+            ))}
+          </ul>
         </div>
-      </section>
-    </main>
-  );
+      ))}
+    </div>
+  </section>
+
+  <section className="relative mx-auto max-w-4xl px-6 pb-24">
+    <div className="rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-10 text-center backdrop-blur-xl">
+      <h2 className="mb-4 text-4xl font-bold">
+        Ready to get started?
+      </h2>
+
+      <p className="mx-auto mb-8 max-w-2xl text-white/70">
+        Install the Misfitz Discord Bot and access statistics,
+        collections, leaderboards and tracking directly from Discord.
+      </p>
+
+      <div className="flex flex-col justify-center gap-4 sm:flex-row">
+        <Link
+          href="/discord/choose"
+          className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 font-semibold backdrop-blur-xl transition hover:border-[#7CFF00]/50"
+        >
+          Add to Discord Server
+        </Link>
+
+        <Link
+          href="/discord/userBot"
+          className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 font-semibold backdrop-blur-xl transition hover:border-[#00D9FF]/50"
+        >
+          User Install
+        </Link>
+      </div>
+    </div>
+  </section>
+</main>
+);
 }

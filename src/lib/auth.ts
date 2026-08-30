@@ -30,15 +30,10 @@ export interface VerificationResult {
 }
 
 
-/*
- * Authentication
- */
+
 import { notifyAuthInvalid } from "@/lib/authEvents";
 
-export async function authFetch(
-  input: RequestInfo | URL,
-  init?: RequestInit
-): Promise<Response> {
+export async function authFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   const response = await fetch(input, {
     ...init,
     credentials: "include",
@@ -48,7 +43,6 @@ export async function authFetch(
   if (response.status === 401) {
     notifyAuthInvalid();
   }
-
   return response;
 }
 
@@ -58,22 +52,13 @@ export async function getCurrentAccount(): Promise<Account | null> {
   cache: "no-store"
 });
 
-  const data: MeResponse =
-    await response.json();
-
+  const data: MeResponse = await response.json();
   if (!data.loggedIn) {
     return null;
   }
 
   return data.account ?? null;
 }
-
-
-/*
- * Development login
- *
- * Only call this from development code.
- */
 
 export async function devLogin(): Promise<void> {
   const response = await fetch(
@@ -85,16 +70,9 @@ export async function devLogin(): Promise<void> {
   );
 
   if (!response.ok) {
-    throw new Error(
-      "Development login failed."
-    );
+    throw new Error("Development login failed.");
   }
 }
-
-
-/*
- * Logout
- */
 
 export async function logout(): Promise<void> {
   const response = await fetch(
@@ -112,54 +90,22 @@ export async function logout(): Promise<void> {
   }
 }
 
-
-/*
- * Verification
- */
-
-export async function startVerification(
-  playerId: string
-): Promise<VerificationResult> {
-
-const response = await authFetch(
-  `/api/auth/verify/start/${encodeURIComponent(playerId)}`
-);
-
+export async function startVerification(playerId: string): Promise<VerificationResult> {
+const response = await authFetch(`/api/auth/verify/start/${encodeURIComponent(playerId)}`);
   return response.json();
 }
-
 
 export async function checkVerification(): Promise<VerificationResult> {
-
-const response = await authFetch(
-  "/api/auth/verify/check"
-);
-
+const response = await authFetch("/api/auth/verify/check");
   return response.json();
 }
-
 
 export async function cancelVerification(): Promise<VerificationResult> {
-
-const response = await authFetch(
-  "/api/auth/verify",
-  {
-    method: "DELETE"
-  }
-);
-
+const response = await authFetch("/api/auth/verify",{method: "DELETE"});
   return response.json();
 }
 
-
-/*
- * Account management
- */
-
-export async function removePlayer(
-  playerId: string
-): Promise<boolean> {
-
+export async function removePlayer(playerId: string): Promise<boolean> {
   const response = await authFetch(
     `/api/auth/player/${encodeURIComponent(playerId)}`,
     {
@@ -171,42 +117,24 @@ export async function removePlayer(
     return false;
   }
 
-  const data =
-    await response.json();
-
+  const data = await response.json();
   return data.success === true;
 }
 
 
 export async function deleteAccount(): Promise<boolean> {
-
-  const response = await authFetch(
-    "/api/auth/account",
-    {
-      method: "DELETE"
-    }
-  );
-
+  const response = await authFetch("/api/auth/account", {method: "DELETE"});
   if (!response.ok) {
     return false;
   }
 
-  const data =
-    await response.json();
-
+  const data = await response.json();
   return data.success === true;
 }
 
 
-/*
- * Privacy
- */
-
-export async function updatePrivacy(
-  playerId: string,
-  privacy: LinkedAccount["privacy"]
+export async function updatePrivacy(playerId: string,  privacy: LinkedAccount["privacy"]
 ): Promise<boolean> {
-
   const response = await authFetch(
     "/api/auth/privacy",
     {
@@ -225,8 +153,7 @@ export async function updatePrivacy(
     return false;
   }
 
-  const data =
-    await response.json();
+  const data = await response.json();
 
   return data.success === true;
 }

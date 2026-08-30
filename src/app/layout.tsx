@@ -9,17 +9,14 @@ import { AuthProvider } from "@/lib/AuthContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://misfitz-stats.pages.dev"),
-
-  title: "Misfitz Statz",
-  description:
-    "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
+  title:        "Misfitz Statz",
+  description:  "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
 
   openGraph: {
-    title: "Misfitz Statz",
-    description:
-      "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
-    url: "https://misfitz-stats.pages.dev",
-    siteName: "Misfitz Stats",
+    title:        "Misfitz Statz",
+    description:  "Track your Misfitz progress, compare players, explore leaderboards and view detailed statistics.",
+    url:          "https://misfitz-stats.pages.dev",
+    siteName:     "Misfitz Stats",
     images: [
       {
         url: "front.png",
@@ -32,20 +29,14 @@ export const metadata: Metadata = {
   },
 
   twitter: {
-    card: "summary_large_image",
-    title: "Misfitz Statz",
-    description:
-      "Track your Misfitz progress, compare players and climb the leaderboards.",
+    card:         "summary_large_image",
+    title:        "Misfitz Statz",
+    description:  "Track your Misfitz progress, compare players and climb the leaderboards.",
     images: ["/front.png"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
+export default function RootLayout({children,}:Readonly<{children: React.ReactNode}>) {
 return (
 <html lang="en">
 <body className="min-h-svh bg-[#0B0F19] text-white">

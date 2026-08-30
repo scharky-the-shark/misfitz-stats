@@ -51,22 +51,12 @@ export default function ReportModal({
   onClose
 }: ReportModalProps) {
 
-  const { loggedIn } = useAuth();
-
-  const [reason, setReason] =
-    useState<ReportReason | "">("");
-
-const [showDisclaimer, setShowDisclaimer] =
-useState(false);
-
-const [submitting, setSubmitting] =
-useState(false);
-
-const [message, setMessage] =
-useState("");
-
-const [messageType, setMessageType] =
-useState<"success" | "error" | "info">("info");
+const { loggedIn }        = useAuth();
+const [reason, setReason] = useState<ReportReason | "">("");
+const [showDisclaimer, setShowDisclaimer] = useState(false);
+const [submitting, setSubmitting]   = useState(false);
+const [message, setMessage]         = useState("");
+const [messageType, setMessageType] = useState<"success" | "error" | "info">("info");
 
 useEffect(() => {
 if (!open) {
@@ -77,24 +67,13 @@ setReason("");
 setMessage("");
 setSubmitting(false);
 
-const disclaimerAccepted =
-  localStorage.getItem(
-    "report_disclaimer"
-  ) === "true";
-
+const disclaimerAccepted = localStorage.getItem("report_disclaimer") === "true";
 setShowDisclaimer(!disclaimerAccepted);
-
 }, [open]);
 
 
-function acceptDisclaimer() {
-localStorage.setItem(
-"report_disclaimer",
-"true"
-);
-
+function acceptDisclaimer() {localStorage.setItem("report_disclaimer", "true");
 setShowDisclaimer(false);
-
 }
 
 async function submitReport() {
@@ -108,9 +87,7 @@ return;
 
 if (!reason) {
   setMessageType("error");
-  setMessage(
-    "Please select a reason for this report."
-  );
+  setMessage("Please select a reason for this report.");
   return;
 }
 
@@ -143,30 +120,21 @@ try {
   }
 
   if (!response.ok) {
-    throw new Error(
-      data.error ||
-      "Failed to submit report."
-    );
+    throw new Error(data.error || "Failed to submit report.");
   }
 
   setMessageType("success");
-  setMessage(
-    "Report submitted successfully."
-  );
+  setMessage("Report submitted successfully.");
 
   setReason("");
 } catch (error: any) {
   console.error(error);
 
   setMessageType("error");
-  setMessage(
-    error?.message ||
-    "Failed to submit report."
-  );
+  setMessage(error?.message || "Failed to submit report.");
 } finally {
   setSubmitting(false);
 }
-
 }
 
 if (!open) {
@@ -182,16 +150,11 @@ onClose();
 }
 }}
 > <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 p-6 shadow-2xl">
-
-    {/* HEADER */}
-
     <div className="flex items-start justify-between gap-4">
-
       <div>
         <h2 className="text-2xl font-bold text-white">
           Report Player
         </h2>
-
         <p className="mt-1 text-sm text-white/50">
           Report an issue related to this player.
         </p>
@@ -204,35 +167,23 @@ onClose();
       >
         ×
       </button>
-
     </div>
 
-    {/* PLAYER */}
-
     <div className="mt-6 rounded-xl border border-white/10 bg-black/20 p-4">
-
       <p className="text-xs uppercase tracking-wider text-white/40">
         Player
       </p>
-
       <p className="mt-1 text-lg font-bold text-white">
         {playerName}
       </p>
-
       <p className="mt-1 font-mono text-sm text-cyan-400">
         {playerId}
       </p>
-
     </div>
 
-    {/* DISCLAIMER */}
-
     {showDisclaimer ? (
-
       <div className="mt-6">
-
         <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4">
-
           <h3 className="font-bold text-yellow-300">
             Before submitting a report
           </h3>
@@ -253,11 +204,9 @@ onClose();
             Reports concerning the game itself may
             need to be handled on Antihero Studios Support channel on Discord.
           </p>
-
         </div>
 
         <div className="mt-4 flex justify-end gap-3">
-
           <button
             onClick={onClose}
             className="rounded-xl bg-slate-700 px-4 py-2 font-semibold text-white transition hover:bg-slate-600"
@@ -271,18 +220,11 @@ onClose();
           >
             I understand
           </button>
-
         </div>
-
       </div>
-
     ) : (
-
       <>
-        {/* REASON */}
-
         <div className="mt-6">
-
           <label
             htmlFor="report-reason"
             className="mb-2 block text-sm font-semibold text-white/70"
@@ -293,13 +235,7 @@ onClose();
           <select
             id="report-reason"
             value={reason}
-            onChange={(event) =>
-              setReason(
-                event.target.value as
-                  | ReportReason
-                  | ""
-              )
-            }
+            onChange={(event) => setReason(event.target.value as | ReportReason | "")}
             disabled={submitting}
             className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-lime-400/50 disabled:cursor-not-allowed disabled:opacity-50"
           >
@@ -314,15 +250,10 @@ onClose();
               </option>
             ))}
           </select>
-
         </div>
 
-        {/* LOGIN STATUS */}
-
         {!loggedIn && (
-
           <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4">
-
             <p className="text-sm text-red-300">
               You must be logged in to submit
               a report.
@@ -332,29 +263,15 @@ onClose();
               Your account is required to verify
               who submitted the report.
             </p>
-
           </div>
-
         )}
 
-        {/* STATUS */}
-
         {message && (
-
           <div
-            className={`
-              mt-4
-              rounded-xl
-              border
-              p-4
-              text-sm
-
+            className={`mt-4 rounded-xl border p-4 text-sm
               ${
-                messageType === "success"
-                  ? "border-lime-400/20 bg-lime-400/10 text-lime-300"
-                  : messageType === "error"
-                  ? "border-red-500/20 bg-red-500/10 text-red-300"
-                  : "border-white/10 bg-white/5 text-white/70"
+                messageType === "success" ? "border-lime-400/20 bg-lime-400/10 text-lime-300" : 
+                messageType === "error" ? "border-red-500/20 bg-red-500/10 text-red-300" : "border-white/10 bg-white/5 text-white/70"
               }
             `}
           >
@@ -363,10 +280,7 @@ onClose();
 
         )}
 
-        {/* ACTIONS */}
-
         <div className="mt-6 flex justify-end gap-3">
-
           <button
             onClick={onClose}
             disabled={submitting}
@@ -377,26 +291,15 @@ onClose();
 
           <button
             onClick={submitReport}
-            disabled={
-              !loggedIn ||
-              !reason ||
-              submitting
-            }
+            disabled={  !loggedIn || !reason || submitting}
             className="rounded-xl bg-lime-400 px-5 py-2 font-bold text-black transition hover:bg-lime-300 disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-neutral-400"
           >
-            {submitting
-              ? "Submitting..."
-              : "Submit Report"}
+            {submitting ? "Submitting..." : "Submit Report"}
           </button>
-
         </div>
-
       </>
-
     )}
-
   </div>
 </div>
-
 );
 }

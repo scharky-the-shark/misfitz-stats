@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import DeleteAccountModal from "@/components/settings/DeleteAccountModal";
+import DeleteAccountModal from "@/components/DeleteAccountModal";
 import { deleteAccount as deleteAccountRequest } from "@/lib/auth";
 
 interface DangerZoneProps {
