@@ -1,95 +1,138 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const comparisons = [
-{
-  feature: "Direct Messages",
-  website: true,
-  bot: false,
-  support: false,
-},
-{
-  feature: "Server Installation",
-  website: false,
-  bot: true,
-  support: true,
-},
-{
-  feature: "Account Verification",
-  website: true,
-  bot: true,
-  support: true,
-},
-{
-  feature: "Personal Tracking",
-  website: true,
-  bot: true,
-  support: true,
-},
-{
-  feature: "Server Leaderboards",
-  website: false,
-  bot: true,
-  support: true,
-},
-{
-  feature: "View Server Members stats",
-  website: false,
-  bot: true,
-  support: true,
-},
-{
-  feature: "Moderation",
-  website: false,
-  bot: false,
-  support: true,
-},
-{
-  feature: "SecurityCore",
-  website: false,
-  bot: false,
-  support: true,
-},
-{
-  feature: "Scam Detection",
-  website: false,
-  bot: false,
-  support: true,
-},
-{
-  feature: "Custom AutoMod",
-  website: false,
-  bot: false,
-  support: true,
-},
-{
-  feature: "Early Access Features",
-  website: true,
-  bot: false,
-  support: false,
-},
+type FeatureStatus = "available" | "development" | "unavailable";
+
+type Comparison = {
+  feature: string;
+  personal: FeatureStatus;
+  community: FeatureStatus;
+  communityPlus: FeatureStatus;
+};
+
+const comparisons: Comparison[] = [
+  {
+    feature: "Direct Messages",
+    personal: "available",
+    community: "unavailable",
+    communityPlus: "unavailable",
+  },
+  {
+    feature: "Server Installation",
+    personal: "unavailable",
+    community: "available",
+    communityPlus: "available",
+  },
+  {
+    feature: "Account Verification",
+    personal: "available",
+    community: "available",
+    communityPlus: "available",
+  },
+  {
+    feature: "Personal Tracking",
+    personal: "available",
+    community: "available",
+    communityPlus: "available",
+  },
+  {
+    feature: "View Server Members Stats",
+    personal: "unavailable",
+    community: "available",
+    communityPlus: "available",
+  },
+  {
+    feature: "Moderation",
+    personal: "unavailable",
+    community: "unavailable",
+    communityPlus: "available",
+  },
+  {
+    feature: "SecurityCore",
+    personal: "unavailable",
+    community: "unavailable",
+    communityPlus: "available",
+  },
+  {
+    feature: "Scam Detection",
+    personal: "unavailable",
+    community: "unavailable",
+    communityPlus: "available",
+  },
+  {
+    feature: "Custom AutoMod",
+    personal: "unavailable",
+    community: "unavailable",
+    communityPlus: "development",
+  },
+  {
+    feature: "Server Leaderboards",
+    personal: "unavailable",
+    community: "development",
+    communityPlus: "development",
+  },
+  {
+    feature: "Early Access Features",
+    personal: "available",
+    community: "unavailable",
+    communityPlus: "unavailable",
+  },
 ];
 
-function StatusIcon({ value }: { value: boolean }) {
-  return (
+const statusConfig: Record<
+  FeatureStatus,
+  {
+    label: string;
+    icon?: string;
+    className: string;
+  }
+> = {
+  available: {
+    label: "Available",
+    icon: "/images/check.png",
+    className: "text-[#7CFF00]",
+  },
+  development: {
+    label: "In development",
+    icon: "/goldenGoose.png",
+    className: "text-yellow-300",
+  },
+  unavailable: {
+    label: "Not available",
+    icon: "/images/cross.png",
+    className: "text-white/35",
+  },
+};
+
+function StatusIcon({ status }: { status: FeatureStatus }) {
+  const config = statusConfig[status];
+
+return (
+<div
+  className={`flex items-center justify-center gap-2 text-sm font-medium ${config.className}`}
+>
+  {config.icon ? (
     <Image
-      src={value ? "/images/check.png" : "/images/cross.png"}
-      alt={value ? "Available" : "Unavailable"}
-      width={24}
-      height={24}
+      src={config.icon}
+      alt=""
+      width={22}
+      height={22}
+      className={status === "unavailable" ? "opacity-40" : ""}
     />
-  );
+  ) : (
+    <span className="h-2.5 w-2.5 rounded-full bg-yellow-300" />
+  )}
+
+  <span className="hidden lg:inline">{config.label}</span>
+</div>
+);
 }
 
 export default function DiscordComparePage() {
 return (
 <main className="relative min-h-screen overflow-hidden bg-[#0b1220] text-white">
-  <section className="relative mx-auto max-w-7xl px-6 pt-12 text-center">
-    <div className="mb-4 text-sm uppercase tracking-[0.35em] text-white/50">
-      Compare
-    </div>
-
-    <h1 className="mb-6 text-5xl font-black uppercase md:text-7xl">
+  <section className="relative mx-auto max-w-6xl px-6 pt-12 text-center">
+    <h1 className="mb-6 text-5xl font-black uppercase md:text-6xl">
       PRIVATE BOT
       <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
         OR SERVER BOT
@@ -97,7 +140,8 @@ return (
     </h1>
 
     <p className="mx-auto max-w-3xl text-lg text-white/70">
-      Every version has a different purpose. Choose what you need
+      Every version has a different purpose. Compare the available
+      features and choose the bot that fits your needs.
     </p>
   </section>
 
@@ -118,88 +162,101 @@ return (
           <div className="font-medium">{item.feature}</div>
 
           <div className="flex justify-center">
-            <StatusIcon value={item.website} />
+            <StatusIcon status={item.personal} />
           </div>
 
           <div className="flex justify-center">
-            <StatusIcon value={item.bot} />
+            <StatusIcon status={item.community} />
           </div>
 
           <div className="flex justify-center">
-            <StatusIcon value={item.support} />
+            <StatusIcon status={item.communityPlus} />
           </div>
         </div>
       ))}
     </div>
   </section>
 
-  <section className="relative mx-auto max-w-7xl px-2 pb-20">
-      <h2 className="mb-11 text-center text-2xl font-bold">
-        By adding the bot to your account or server you agree our TOS and Privacy Policy
-      </h2>
+  <section className="relative mx-auto max-w-7xl px-6 pb-10">
+    <h2 className="mb-10 text-center text-2xl font-bold">
+      Choose the bot that fits your needs
+    </h2>
+
     <div className="grid gap-6 lg:grid-cols-3">
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-        <h3 className="mb-4 text-2xl font-bold">Personal</h3>
+      <div className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+        <h3 className="mb-4 text-2xl font-bold">Personal Bot</h3>
+
         <p className="text-white/70">
-          Perfect if you interested in your stats. Manage your account from Discord everywhere
+          Perfect if you are interested in your personal statistics.
+          Manage your Misfitz Statz account directly from Discord.
         </p>
+
+        <div className="mt-auto pt-6">
           <Link
-          href="/discord/userBot"
-          className="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10"
+            href="/discord/userBot"
+            className="inline-flex w-full justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold transition hover:border-[#00D9FF] hover:bg-[#00D9FF]/10"
           >
             Install Personal Bot
           </Link>
+        </div>
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-        <h3 className="mb-4 text-2xl font-bold">
-          Community Bot
-        </h3>
+      <div className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+        <h3 className="mb-4 text-2xl font-bold">Community Bot</h3>
+
         <p className="text-white/70">
-          Built for active competitives. Power up as a group and compete in server leaderbaords
+          Built for active communities. Bring your players together,
+          compare statistics and compete through server features.
         </p>
+
+        <div className="mt-auto pt-6">
           <Link
             href="/discord/communityBot"
-          className="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold transition hover:border-[#7CFF00] hover:bg-[#7CFF00]/10"
+            className="inline-flex w-full justify-center rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold transition hover:border-[#7CFF00] hover:bg-[#7CFF00]/10"
           >
             Install Community Bot
           </Link>
+        </div>
       </div>
 
-      <div className="rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-8 backdrop-blur-xl">
-        <h3 className="mb-4 text-2xl font-bold text-[#7CFF00]">Community Bot +</h3>
+      <div className="flex h-full flex-col rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-8 backdrop-blur-xl">
+        <h3 className="mb-4 text-2xl font-bold text-[#7CFF00]">
+          Community Bot +
+        </h3>
         <p className="text-white/70">
-          The Statz bot for your server upgraded with server moderation and filters scam
+          The Community Bot upgraded with advanced moderation, security
+          features and scam protection.
         </p>
+
+        <div className="mt-auto pt-6">
           <Link
             href="/discord/communityBotPlus"
-            className="mt-6 inline-flex w-full justify-center rounded-2xl border border-[#7CFF00]/30 bg-[#7CFF00]/10 px-6 py-3 font-semibold text-[#7CFF00] transition hover:bg-[#7CFF00]/20"
+            className="inline-flex w-full justify-center rounded-2xl border border-[#7CFF00]/30 bg-[#7CFF00]/10 px-6 py-3 font-semibold text-[#7CFF00] transition hover:bg-[#7CFF00]/20"
           >
             Install Community Bot +
           </Link>
+        </div>
       </div>
     </div>
   </section>
 
-  <section className="relative mx-auto max-w-5xl px-6 pb-24">
-    <div className="rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-10 text-center backdrop-blur-xl">
-      <h2 className="mb-4 text-4xl font-black uppercase">
-        Need a custom Statz Bot?
-        <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
-          Contact us
-        </span>
-      </h2>
-      <p className="mx-auto mb-8 max-w-3xl text-white/70">
-        From general features up to tournament hosting
-      </p>
-      <div className="flex flex-col justify-center gap-4 sm:flex-row">
-        <Link
-          href="https://discord.com/invite/74suQKzBkp"
-          className="rounded-2xl border border-white/15 bg-white/5 px-8 py-4 font-semibold backdrop-blur-xl"
-        >
-          Start your journey
-        </Link>
+  <section className="relative mx-auto max-w-4xl px-2 pb-8">
+    <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur-xl sm:flex-row">
+      <div>
+        <h2 className="text-lg font-bold">
+          Need a custom Statz Bot?
+        </h2>
+        <p className="mt-1 text-sm text-white/55">
+          Contact us for custom setups and specialized community features.
+        </p>
       </div>
+
+      <Link
+        href="https://discord.com/invite/74suQKzBkp"
+        className="shrink-0 rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold transition hover:border-[#7CFF00]/40 hover:bg-[#7CFF00]/10"
+      >
+        Contact us
+      </Link>
     </div>
   </section>
 </main>

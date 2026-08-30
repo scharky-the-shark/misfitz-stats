@@ -27,9 +27,9 @@ const features = [
     href: "/game/sneak-peeks",
   },
   {
-    title: "(Soon) Tutorials",
-    desc: "Learn mechanics, strategies and advanced gameplay techniques.",
-    href: "#",
+    title: "Discord Bot",
+    desc: "Look more deeply into statsand share your stats directly on discord server ",
+    href: "/discord",
   }
 ];
 

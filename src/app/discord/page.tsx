@@ -1,21 +1,20 @@
 "use client";
-
 import Link from "next/link";
 
 const resources = [
   {
     title: "Commands",
-    desc: "View all available Discord commands.",
+    desc: "View available Discord commands",
     href: "/discord/commands",
   },
   {
     title: "Update Log",
-    desc: "New features and changes.",
+    desc: "New features and changes",
     href: "/version/discord",
   },
   {
     title: "Compare",
-    desc: "Compare the bot with the website.",
+    desc: "Compare the bot with the website",
     href: "/discord/compare",
   },
   {
@@ -25,17 +24,17 @@ const resources = [
   },
   {
     title: "Privacy Policy",
-    desc: "Learn how your data is handled.",
+    desc: "Learn how your data is handled",
     href: "/privacy",
   },
   {
     title: "Terms of Service",
-    desc: "Read the Discord Bot terms.",
+    desc: "Read the Discord Bot terms",
     href: "/terms",
   },
   {
     title: "Errors",
-    desc: "Our error Documentation for Misfitz Statz",
+    desc: "Error Documentation for the bot",
     href: "/discord/errorcodes",
   },
   {
@@ -48,10 +47,10 @@ const resources = [
 export default function DiscordPage() {
 return (
 <main className="relative min-h-fit overflow-hidden bg-[#0b1220] text-white select-none">
-  <section className="relative mx-auto flex min-h-[60vh] max-w-7xl flex-col items-center justify-center px-6 text-center">
+  <section className="relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-center justify-center px-6 text-center">
     <div className="absolute h-[420px] w-[420px] rounded-full bg-[#7CFF00]/10 blur-3xl" />
     <div className="relative z-10 max-w-5xl">
-      <h1 className="mb-4 text-4xl font-black uppercase tracking-wider md:text-7xl">
+      <h1 className="mb-4 text-4xl font-black uppercase tracking-wider md:text-6xl">
         The Ultimate
         <span className="block bg-gradient-to-r from-[#7CFF00] to-[#00D9FF] bg-clip-text text-transparent">
           MISFITZ DISCORD BOT
@@ -78,7 +77,7 @@ return (
       <Link
         key={card.title}
         href={card.href}
-        className="group rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#7CFF00]/40 hover:bg-white/10"
+        className="group rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition duration-300 hover:border-[#7CFF00]/40 hover:bg-white/10"
       >
         <h3 className="mb-2 text-xl font-bold">{card.title}</h3>
         <p className="text-[15px] leading-relaxed text-white/65">
@@ -86,25 +85,6 @@ return (
         </p>
       </Link>
     ))}
-  </section>
-
-  <section className="relative mx-auto max-w-2xl px-6 pb-20">
-    <div className="rounded-3xl border border-[#7CFF00]/20 bg-[#7CFF00]/5 p-8 text-center backdrop-blur-xl">
-      <div className="mb-2 text-3xl"></div>
-      <h2 className="mb-3 text-2xl font-bold">
-        Support
-      </h2>
-
-      <p className="mx-auto mb-6 max-w-2xl text-white/70">
-        Join the Crash Test / Support Server
-      </p>
-      <Link
-        href="https://discord.gg/jwSeHD9BrA"
-        className="inline-flex rounded-2xl border border-white/15 bg-white/5 px-6 py-3 font-semibold backdrop-blur-xl transition hover:border-[#7CFF00] hover:bg-[#7CFF00]/10"
-      >
-        Join Support Server
-      </Link>
-    </div>
   </section>
 </main>
 );

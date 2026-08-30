@@ -56,53 +56,28 @@ const mobileNavigation = [
     title: "Leaderboards",
     items: [
       { label: "Top Relic Extractor", href: "/leaderboards/relics" },
-      { label: "Most Killers", href: "/leaderboards/kills" },
-      { label: "Most Deaths", href: "/leaderboards/deaths" },
-      { label: "Highest Playtime", href: "/leaderboards/playtime" },
+      { label: "Most Killers",        href: "/leaderboards/kills" },
+      { label: "Most Deaths",         href: "/leaderboards/deaths" },
+      { label: "Highest Playtime",    href: "/leaderboards/playtime" },
     ],
   },
   {
     title: "Game",
     items: [
-      {
-        label: "Characters",
-        href: "/game/misfits",
-      },
-      { label: "Meta Stats", 
-        href: "/game/meta" },
-      {
-        label: "Relics",
-        href: "https://misfitz.fandom.com/wiki/Relics",
-      },
-      {
-        label: "Map",
-        href: "https://misfitz.fandom.com/wiki/Zero_City",
-      },
-      {
-        label: "Sneak Peeks",
-        href: "/game/sneak-peeks",
-      },
+      {label: "Characters",   href: "/game/misfits"},
+      { label: "Meta Stats",  href: "/game/meta" },
+      {label: "Relics",       href: "https://misfitz.fandom.com/wiki/Relics"},
+      {label: "Map",          href: "https://misfitz.fandom.com/wiki/Zero_City"},
+      {label: "Sneak Peeks",  href: "/game/sneak-peeks"},
     ],
   },
   {
     title: "Version",
     items: [
-      {
-        label: "Antihero Studios",
-        href: "/version/antiherostudios",
-      },
-      {
-        label: "Game",
-        href: "/version/game",
-      },
-      {
-        label: "Discord Bot",
-        href: "/version/discord",
-      },
-      {
-        label: "Website",
-        href: "/version/website",
-      },
+      {label: "Antihero Studios", href: "/version/antiherostudios",},
+      {label: "Game",             href: "/version/game"},
+      {label: "Discord Bot",      href: "/version/discord"} ,
+      {label: "Website",          href: "/version/website",},
     ],
   },
   {
@@ -123,10 +98,10 @@ const navigation = [
     title: "Game",
     color: "#7CFF00",
     items: [
-      { label: "Characters", href: "/game/misfits" },
-      { label: "Meta Stats", href: "/game/meta" },
-      { label: "Relics", href: "https://misfitz.fandom.com/wiki/Relics" },
-      { label: "Map", href: "https://misfitz.fandom.com/wiki/Zero_City" },
+      { label: "Characters",  href: "/game/misfits" },
+      { label: "Meta Stats",  href: "/game/meta" },
+      { label: "Relics",      href: "https://misfitz.fandom.com/wiki/Relics" },
+      { label: "Map",         href: "https://misfitz.fandom.com/wiki/Zero_City" },
       { label: "Sneak Peeks", href: "/game/sneak-peeks" },
     ],
   },
@@ -134,10 +109,10 @@ const navigation = [
     title: "Version",
     color: "#7CFF00",
     items: [
-      { label: "Antihero Studios", href: "/version/antiherostudios" },
-      { label: "Game", href: "/version/game" },
-      { label: "Discord Bot", href: "/version/discord" },
-      { label: "Misfitz Statz Page", href: "/version/website" },
+      { label: "Antihero Studios",    href: "/version/antiherostudios" },
+      { label: "Game",                href: "/version/game" },
+      { label: "Discord Bot",         href: "/version/discord" },
+      { label: "Misfitz Statz Page",  href: "/version/website" },
     ],
   },
   {
@@ -145,9 +120,9 @@ const navigation = [
     color: "#00D9FF",
     items: [
       { label: "Top Relic Extractor", href: "/leaderboards/relics" },
-      { label: "Most Killers", href: "/leaderboards/kills" },
-      { label: "Most Deaths", href: "/leaderboards/deaths" },
-      { label: "Highest Playtime", href: "/leaderboards/playtime" },
+      { label: "Most Killers",        href: "/leaderboards/kills" },
+      { label: "Most Deaths",         href: "/leaderboards/deaths" },
+      { label: "Highest Playtime",    href: "/leaderboards/playtime" },
     ],
   },
   {
@@ -354,13 +329,6 @@ return (
                 className="block rounded-xl px-3 py-2 hover:bg-white/5"
               >
                 Verification
-              </a>
-              <a
-                href="/redeem"
-                onClick={() => setMenuOpen(false)}
-                className="block rounded-xl px-3 py-2 hover:bg-white/5"
-              >
-                Redeem a Code
               </a>
               <button
                 onClick={handleLogout}
